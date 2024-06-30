@@ -1,0 +1,23 @@
+.container{
+    position: fixed;
+    height: 100%;
+    width:30%;
+    background-color: white;
+    color:black;
+    z-index: 999999;
+    top:0;
+    right:0;
+    transform:translate(100%);
+    display: flex;
+    justify-content: space-between;
+    transition: transform 0.2s linear ;
+}
+
+.show_sidebar{
+    transform: translate(0);
+    // body::-webkit-scrollbar {
+    //     display: none;
+    //     overflow:hidden;
+    // }
+}
+

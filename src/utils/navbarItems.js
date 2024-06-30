@@ -1,0 +1,1 @@
+export const items=["new releases","women","men","children","collections","promos"]
