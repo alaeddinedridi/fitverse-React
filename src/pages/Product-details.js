@@ -29,7 +29,7 @@ const ProductDetails = () => {
                         <div><img src="" alt="" /></div>
                     </div>
                     
-                    <div className={classes.left__img}>{product.images && <img className={classes.img} src={"/images/"+product.images[featured]} alt="" />}</div>
+                    <div className={classes.left__img}>{product.images && <img className={classes.img} src={"http://localhost:3001/uploads/"+product.images[featured]} alt="" />}</div>
                 </div>
                 <div className={classes.container__right}>
                     <h1 className={classes.right__title}>{product.name}</h1>
@@ -37,7 +37,7 @@ const ProductDetails = () => {
                     <div className={classes.right__price}>$ {product.price}</div>
                     <div className={classes.right__stock}>In stock</div>
                     <div className={classes.imgs_wrapper}>
-                        {product.images && product.images.map((image,index)=><div key={index} className={classes.right__img}><img className={classes.img} onClick={()=>setFeatured(index)} src={"/images/"+image} alt="" /></div>)}
+                        {product.images && product.images.map((image,index)=><div key={index} className={classes.right__img}><img className={classes.img} onClick={()=>setFeatured(index)} src={"http://localhost:3001/uploads/"+image} alt="" /></div>)}
                         
                     </div>
                     <div className={classes.btns}>

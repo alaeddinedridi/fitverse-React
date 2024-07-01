@@ -13,8 +13,8 @@ const Product = (props) => {
     return (
         
         <article className={classes.product} onMouseEnter={()=>setShow(true)} onMouseLeave={()=>setShow(false)}>
-            <Link to={`${brand}/${_id}`} style={{ textDecoration: 'none',color:'black' }}>
-            <div><img src={`/images/${images[0]}`} className={classes.img} alt={images[0]} /></div>
+            <Link to={`/${brand}/${_id}`} style={{ textDecoration: 'none',color:'black' }}>
+            <div><img src={`http://localhost:3001/uploads/${images[0]}`} className={classes.img} alt={images[0]} /></div>
             <h1 className={classes.title}>{name}</h1>
             <div className={classes.description}>{description}</div>
             <div className={classes.price}>$ {price}</div>

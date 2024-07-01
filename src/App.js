@@ -13,6 +13,9 @@ import Shipping from './pages/Shipping';
 import Payment from './pages/Payment';
 import Order from './pages/Order';
 import ProductUpload from './pages/Product-upload';
+import Men from './pages/Men';
+import Children from './pages/Children';
+import Women from './pages/Women';
 function App() {
   const open=useSelector(selectToggle)
   return (
@@ -20,10 +23,13 @@ function App() {
         <div className={open ? classes.bg : ''}><Sidebar /></div>
        <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/collections" element={<Watches />} />
+        <Route path="/watches" element={<Watches />} />
+        <Route path="/men" element={<Men />} />
+        <Route path="/women" element={<Women />} />
+        <Route path="/children" element={<Children />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product-upload" element={<ProductUpload/>} />
-        <Route path="/collections/:brand/:id" element={<ProductDetails />} />
+        <Route path="/:brand/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
