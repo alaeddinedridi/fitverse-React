@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding:1rem 2rem;
     align-items: center;
+    position: relative;
 }
 
 .header{
@@ -65,6 +66,12 @@
 
 .nav_item{
     cursor: pointer;
+    img{
+        position:absolute;
+        width:140px;
+        height:76px;
+        top:0;
+    }
 }
 
 .header__center{

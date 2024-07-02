@@ -64,9 +64,9 @@ const ProductUpload = () =>{
         </div>
         <label htmlFor="category">Category:</label>
         <select name="category" id="category" {...register("category")}>
-          <option value="clothes">Clothes</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
           <option value="watches">Watches</option>
-          <option value="sunglasses">Sunglasses</option>
         </select>
         <div className={classes.form__element}>
             <input type="text" className={classes.form__text_input} placeholder="Brand" {...register("brand")} />

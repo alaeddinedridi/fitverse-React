@@ -1,8 +1,8 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import Products from '../components/Products'
-const Watches = () => {
-    const data = "watches";
+const Women = () => {
+    const data = "women";
     return (
         <Layout>
             <Products category={data} />
@@ -10,4 +10,4 @@ const Watches = () => {
     )
 }
 
-export default Watches
+export default Women

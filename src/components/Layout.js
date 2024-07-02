@@ -38,7 +38,7 @@ const Layout = (props) => {
                 </div>
                 <nav className={classes.navbar}>
                     <div className={classes.navbar__left}>
-                        <div className={classes.navbar__left__brand+" "+classes.nav_item}><Link style={{ textDecoration: 'none',color:'black' }} to="/"><img src={'/images/clothes/fitverse.JPG'} width="120" height="60" alt=""/></Link></div>
+                        <div className={classes.navbar__left__brand+" "+classes.nav_item}><Link style={{ textDecoration: 'none',color:'black' }} to="/"><img src={'/images/clothes/fitverse.png'} alt=""/></Link></div>
                         <div className={classes.navbar__left__toggle+" "+classes.nav_item}><GiHamburgerMenu onClick={()=>dispatch(toggle(true))}/></div>
                     </div>
                     <div className={classes.navbar__items}>
