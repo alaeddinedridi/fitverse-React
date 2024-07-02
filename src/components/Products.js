@@ -10,13 +10,13 @@ import {filterItems} from '../utils/filterItems'
 import {FiChevronDown} from 'react-icons/fi'
 import {BsChevronDown,BsChevronUp} from 'react-icons/bs'
 import axios from 'axios'
-const Products = () => {
+const Products = (props) => {
     const linksContainerRef = useRef([]);
     const linksRef = useRef([]);
     const [show, setShow] = useState(true)
     const [products, setproducts] = useState([])
     const read = async ()=>{
-        const {data}=await axios.get('http://localhost:3001/products/read')
+        const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+props.category)
         setproducts(data)
     }
     useEffect(() => {
