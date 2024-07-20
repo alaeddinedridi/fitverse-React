@@ -22,6 +22,8 @@ const ProductUpload = () =>{
     });
 
     const [files, setFiles] = useState([])
+    const [pictures, setPictures] = useState([])
+
 
     const submitHandler=async(formdata)=>{
 
@@ -37,6 +39,7 @@ const ProductUpload = () =>{
 
       if (files.length>0) {
         console.log("those are files:"+Array.from(files))
+        //setProducts(Array.from(files))
         Array.from(files).forEach((file, i) => {
           data.append("files", file, file.name)
         })
@@ -48,9 +51,9 @@ const ProductUpload = () =>{
         });
         console.log(res)
        
-    }catch(e){
-        console.log(e.message)
-    }
+      }catch(e){
+          console.log(e.message)
+      }
     }
 
 
@@ -59,29 +62,45 @@ const ProductUpload = () =>{
     <Layout>
       <div className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
-        <div className={classes.form__element}>
-            <input type="text" className={classes.form__text_input} placeholder="Name" {...register("name")} />
-        </div>
-        <label htmlFor="category">Category:</label>
-        <select name="category" id="category" {...register("category")}>
-          <option value="men">Men</option>
-          <option value="women">Women</option>
-          <option value="watches">Watches</option>
-        </select>
-        <div className={classes.form__element}>
-            <input type="text" className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
-        </div>
-        <div className={classes.form__element}>
-            <input type="text" className={classes.form__text_input} placeholder="Price" {...register("price")} />
-        </div>
-        <div className={classes.form__element}>
-            <input type="text" className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
-        </div>
-        <label htmlFor="description">Description:</label>
-        <textarea id="description" name="description" rows="4" cols="50" {...register("description")}></textarea>
+        <div className={classes.left_wrapper}>
 
-        <input type="file" accept="image/*" multiple onChange={(e)=> setFiles(e.target.files)} />
-        <button type="submit">Upload</button>
+          <div className={classes.form__element}>
+              <input type="text" className={classes.form__text_input} placeholder="Name" {...register("name")} />
+          </div>
+        
+          <div className={classes.form__element}>
+            <select name="category" className={classes.form__text_input} id="category" {...register("category")}>
+              <option value="watches">Watches</option>
+              <option value="women">Women</option>
+              <option value="men">Men</option>
+              <option value="children">Children</option>
+            </select>
+
+          </div>
+          <div className={classes.form__element}>
+              <input type="text" className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
+          </div>
+          <div className={classes.form__element}>
+              <input type="text" className={classes.form__text_input} placeholder="Price" {...register("price")} />
+          </div>
+          <div className={classes.form__element}>
+              <input type="text" className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
+          </div>
+          <div className={classes.form__element}>
+            <textarea className={classes.form__text_area} name="description" placeholder="Write a description" rows="4" cols="50" {...register("description")}></textarea>
+          </div>
+        </div>
+        <div className={classes.upload_wrapper}>
+
+          <label htmlFor="file">
+            <input type="file" accept="image/*" id="file" multiple onChange={(e)=> setFiles(e.target.files)} />
+            <div className={classes.image_upload}>Select product pictures</div>
+          </label>
+          
+          <button className={classes.upload_btn} type="submit">Upload</button>
+          
+
+        </div>
         </form>
       </div>
     </Layout>

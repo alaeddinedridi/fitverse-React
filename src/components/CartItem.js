@@ -10,7 +10,7 @@ const CartItem = (props) => {
     return (
         <div className={classes.cart_item}>
             <div className={classes.cart_item__img}>
-                <img className={classes.img} src={"/images/"+images[0]} alt="" />
+                <img className={classes.img} src={`http://localhost:3001/uploads/${images[0]}`} alt="" />
             </div>
             <div className={classes.cart_item__content}>
                 <div className={classes.header}>
