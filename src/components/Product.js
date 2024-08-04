@@ -11,7 +11,7 @@ const Product = (props) => {
     const [show,setShow]=useState(false)
     const dispatch=useDispatch()
     console.log(images)
-    const [isAdmin,setIsAdmin]=useState(true)
+    const [isAdmin,setIsAdmin]=useState(false)
 
     const remove =async (id)=>{
     

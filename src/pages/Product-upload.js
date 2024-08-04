@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import Layout from '../components/Layout'
 import axios from 'axios'
 import classes from '../styles/Product-upload.module.scss'
+import { useDispatch,useSelector } from 'react-redux'
+import {selectUserRole} from '../redux/features/authSlice'
+import { selectUser } from '../redux/features/authSlice'
 
 const addProductSchema = yup.object({
   name: yup.string().required().min(3),
@@ -24,7 +27,9 @@ const ProductUpload = () =>{
     const [files, setFiles] = useState([])
     const [pictures, setPictures] = useState([])
 
-
+    const role = useSelector(selectUserRole);
+    const user = useSelector(selectUser)
+    console.log("this is the role of the user: "+role)
     const submitHandler=async(formdata)=>{
 
       const data = new FormData()
@@ -35,7 +40,7 @@ const ProductUpload = () =>{
       data.append("price",formdata.price);
       data.append("stock",formdata.stock);
       data.append("description",formdata.description);
-  
+      data.append("role",role);
 
       if (files.length>0) {
         console.log("those are files:"+Array.from(files))
@@ -44,10 +49,14 @@ const ProductUpload = () =>{
           data.append("files", file, file.name)
         })
       }
-
+      
+      
       try{
-        const { res } = await axios.post('http://localhost:3001/product/upload', data,{
-          "Content-Type": "multipart/form-data"
+        const { res } = await axios.post('http://localhost:3001/product/upload', data,
+        {
+          headers: {
+            authorization: `Bearer ${user.token}`,
+          }
         });
         console.log(res)
        
@@ -55,6 +64,9 @@ const ProductUpload = () =>{
           console.log(e.message)
       }
     }
+
+
+    
 
 
 
