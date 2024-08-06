@@ -14,7 +14,7 @@ const AdminLayout = (props) => {
             <div className={classes.container}>
                 <div className={classes.container__left}>
                 <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/dashboard"}>Dashboard</Link></div>
-                <div className={classes.element}>products</div>
+                <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/products"}>Products</Link></div>
                 <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/product-upload"}>Add product</Link></div>
                 <div className={classes.element}>Orders</div>
                 <div className={classes.element}>Users</div>

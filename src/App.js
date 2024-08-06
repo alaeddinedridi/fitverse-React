@@ -17,6 +17,7 @@ import Men from './pages/Men';
 import Children from './pages/Children';
 import Women from './pages/Women';
 import Dashboard from './pages/admin/Dashboard';
+import AllProducts from './pages/admin/AllProducts';
 function App() {
   const open=useSelector(selectToggle)
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/admin/product-upload" element={<ProductUpload/>} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/products" element={<AllProducts />} />
       </Routes>
     </div>
   );
