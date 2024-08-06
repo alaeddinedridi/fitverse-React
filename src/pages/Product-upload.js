@@ -8,6 +8,7 @@ import classes from '../styles/Product-upload.module.scss'
 import { useDispatch,useSelector } from 'react-redux'
 import {selectUserRole} from '../redux/features/authSlice'
 import { selectUser } from '../redux/features/authSlice'
+import AdminLayout from '../components/AdminLayout';
 
 const addProductSchema = yup.object({
   name: yup.string().required().min(3),
@@ -71,7 +72,7 @@ const ProductUpload = () =>{
 
 
   return (
-    <Layout>
+    <AdminLayout>
       <div className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <div className={classes.left_wrapper}>
@@ -115,7 +116,7 @@ const ProductUpload = () =>{
         </div>
         </form>
       </div>
-    </Layout>
+    </AdminLayout>
   )
 }
 

@@ -16,6 +16,7 @@ import ProductUpload from './pages/Product-upload';
 import Men from './pages/Men';
 import Children from './pages/Children';
 import Women from './pages/Women';
+import Dashboard from './pages/admin/Dashboard';
 function App() {
   const open=useSelector(selectToggle)
   return (
@@ -28,12 +29,14 @@ function App() {
         <Route path="/women" element={<Women />} />
         <Route path="/children" element={<Children />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product-upload" element={<ProductUpload/>} />
+        
         <Route path="/:brand/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/admin/product-upload" element={<ProductUpload/>} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
