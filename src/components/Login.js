@@ -9,6 +9,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import {login,selectUser} from '../redux/features/authSlice'
 
+
 const schema = yup.object({
     email: yup.string().required().email(),
     password: yup.string().required().min(6),
@@ -39,13 +40,18 @@ const Login = () => {
             });
             console.log(data)
             dispatch(login(data))
-            navigate(redirect || '/shipping')
+            if (data.user.role == "user"){
+                navigate(redirect || '/shipping')
+            }else if (data.user.role === "admin"){
+                navigate(redirect || '/admin/dashboard')
+            }
+            
         }catch(e){
             toast.error(e.message)
         }
     }
     return (
-        <div>
+        <div className={classes.wrapper}>
             <Toaster />
             <div className={classes.title}>Login</div>
             <div>If you are a registered user, please enter your email and password.</div>

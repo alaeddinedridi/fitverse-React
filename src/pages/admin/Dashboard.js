@@ -8,7 +8,9 @@ const Dashboard = (props) => {
 
     return (
         <AdminLayout>
-            Hello
+            <div>Number of products</div>
+            <div>Number of Orders</div>
+            <div>Number of Users</div>
         </AdminLayout>
     )
 }
