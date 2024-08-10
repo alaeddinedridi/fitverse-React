@@ -13,11 +13,11 @@ const AdminLayout = (props) => {
         <Layout>
             <div className={classes.container}>
                 <div className={classes.container__left}>
-                <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/dashboard"}>Dashboard</Link></div>
-                <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/products"}>Products</Link></div>
-                <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/product-upload"}>Add product</Link></div>
-                <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/orders"}>Orders</Link></div>
-                <div className={classes.element}><Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/users"}>Users</Link></div>
+                <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/dashboard"}><div className={classes.element}>Dashboard</div></Link>
+                <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/products"}><div className={classes.element}>Products</div></Link>
+                <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/product-upload"}><div className={classes.element}>Add product</div></Link>
+                <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/orders"}><div className={classes.element}>Orders</div></Link>
+                <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/users"}><div className={classes.element}>Users</div></Link>
                     
                 </div>
                 <div className={classes.container__grid}>

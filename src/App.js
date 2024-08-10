@@ -41,6 +41,7 @@ function App() {
         <Route path="/admin/product-upload" element={<ProductUpload/>} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/products" element={<AllProducts />} />
+        <Route path="/admin/product/update/:id" element={<ProductUpload />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/login" element={<Login />} />
       </Routes>

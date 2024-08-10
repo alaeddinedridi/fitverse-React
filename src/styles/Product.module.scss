@@ -57,3 +57,27 @@
     color:black;
     transition: all 1s ease-in-out;
 }
+
+.deleteBtn{
+    width:100%;
+    padding:.5rem;
+    background-color:rgb(240, 105, 128);
+    color:white;
+    cursor:pointer;
+    border:1px solid black;
+    font-weight: 600;
+    text-transform: uppercase;
+    
+}
+
+.updateBtn{
+    width:100%;
+    padding:.5rem;
+    background-color:rgb(238, 164, 86);
+    color:white;
+    cursor:pointer;
+    border:1px solid black;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+}
