@@ -12,6 +12,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import Product from './Product'
 import { useDispatch,useSelector } from 'react-redux'
 import {toggle} from '../redux/features/sidebarSlice'
+import {searchForProduct,selectSearch} from '../redux/features/navbarSlice'
 import { selectNbrItems,clear } from '../redux/features/cartSlice'
 import { selectUser,logout } from '../redux/features/authSlice'
 
@@ -19,6 +20,7 @@ const Layout = (props) => {
     const dispatch=useDispatch()
     const navigate=useNavigate()
     let nbrOfItems = useSelector(selectNbrItems)
+    let whatWeAreSearchingFor= useSelector(selectSearch)
 
     const logoutHandler=()=>{
         dispatch(logout())
@@ -45,7 +47,7 @@ const Layout = (props) => {
                         {items.map((item,index)=><div key={index} className={classes.navbar__item+" "+classes.navbar__items__item+" "+classes.nav_item}><Link style={{ textDecoration: 'none',color:'black' }} to={"/"+item}>{item}</Link></div>)}
                     </div>
                     <div className={classes.navbar__right}>
-                        <div className={classes.navbar__right__search_wrapper}><div><FiSearch className={classes.navbar__right__icon+" "+classes.nav_item} /></div><input type="search" placeholder="Search" className={classes.search} /></div>
+                        <div className={classes.navbar__right__search_wrapper}><div><FiSearch className={classes.navbar__right__icon+" "+classes.nav_item} /></div><input type="search" placeholder="Search" value={whatWeAreSearchingFor} onChange={(e)=> dispatch(searchForProduct(e.target.value))} className={classes.search} /></div>
                         <div className={classes.navbar__item}><BiUser onClick={logoutHandler} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
                         <div className={classes.navbar__item}><FiHeart className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
                         <div className={classes.navbar__item+" "+classes.navbar_item__cart}>{nbrOfItems>0 && <div className={classes.nbr_items}>{nbrOfItems}</div>}<BsHandbag onClick={()=>navigate('/cart')} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
