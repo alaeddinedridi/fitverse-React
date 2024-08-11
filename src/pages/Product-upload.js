@@ -71,28 +71,46 @@ const ProductUpload = () =>{
       data.append("description",formdata.description);
       data.append("role",role);
   
-      if (files.length>0) {
-        console.log("those are files:"+Array.from(files))
-        //setProducts(Array.from(files))
-        Array.from(files).forEach((file, i) => {
-          data.append("files", file, file.name)
-        })
-      }
+     
     
-
-      
-      try{
-        const { res } = await axios.post('http://localhost:3001/product/upload', data,
-        {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          }
-        });
-        console.log(res)
-       
-      }catch(e){
-          console.log(e.message)
+    
+      if (productExist){
+        try{
+          console.log("we are going to update the product")
+          console.log("this is the data to be sent: "+data)
+          const { res } = await axios.put('http://localhost:3001/product/update/'+id, data,
+          {
+            headers: {
+              authorization: `Bearer ${user.token}`,
+            }
+          });
+          console.log(res)
+         
+        }catch(e){
+            console.log(e.message)
+        }
+      }else{
+        if (files.length>0) {
+          console.log("those are files:"+Array.from(files))
+          //setProducts(Array.from(files))
+          Array.from(files).forEach((file, i) => {
+            data.append("files", file, file.name)
+          })
+        }
+        try{
+          const { res } = await axios.post('http://localhost:3001/product/upload', data,
+          {
+            headers: {
+              authorization: `Bearer ${user.token}`,
+            }
+          });
+          console.log(res)
+         
+        }catch(e){
+            console.log(e.message)
+        }
       }
+      
     }
 
 
@@ -107,11 +125,11 @@ const ProductUpload = () =>{
         <div className={classes.left_wrapper}>
 
           <div className={classes.form__element}>
-              <input type="text" value={productExist? product.name:""} className={classes.form__text_input} placeholder="Name" {...register("name")} />
+              <input type="text" defaultValue={productExist? product.name:""} className={classes.form__text_input} placeholder="Name" {...register("name")} />
           </div>
         
           <div className={classes.form__element}>
-            <select name="category" value={productExist? product.category:""} className={classes.form__text_input} id="category" {...register("category")}>
+            <select name="category" defaultValue={productExist? product.category:""} className={classes.form__text_input} id="category" {...register("category")}>
               <option value="watches">Watches</option>
               <option value="women">Women</option>
               <option value="men">Men</option>
@@ -120,16 +138,16 @@ const ProductUpload = () =>{
 
           </div>
           <div className={classes.form__element}>
-              <input type="text" value={productExist? product.brand:""} className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
+              <input type="text" defaultValue={productExist? product.brand:""} className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
           </div>
           <div className={classes.form__element}>
-              <input type="text" value={productExist? product.price:""} className={classes.form__text_input} placeholder="Price" {...register("price")} />
+              <input type="text" defaultValue={productExist? product.price:""} className={classes.form__text_input} placeholder="Price" {...register("price")} />
           </div>
           <div className={classes.form__element}>
-              <input type="text" value={productExist? product.countInStock:""} className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
+              <input type="text" defaultValue={productExist? product.countInStock:""} className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
           </div>
           <div className={classes.form__element}>
-            <textarea className={classes.form__text_area} value={productExist? product.description:""} name="description" placeholder="Write a description" rows="4" cols="50" {...register("description")}></textarea>
+            <textarea className={classes.form__text_area} defaultValue={productExist? product.description:""} name="description" placeholder="Write a description" rows="4" cols="50" {...register("description")}></textarea>
           </div>
         </div>
         <div className={classes.upload_wrapper}>

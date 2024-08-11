@@ -12,10 +12,10 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: auto auto;
-    row-gap: 40px;
+    row-gap: 10px;
     column-gap: 10px;
     justify-content: space-around;
     /* margin-top: 2rem; */
-    background-color: #f4f7fa;
+    background-color: black;
   
 }
