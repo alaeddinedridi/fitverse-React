@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import Card from '../components/Card'
 import Layout from '../components/Layout'
 import Stepper from '../components/Stepper'
@@ -12,7 +12,10 @@ const Order = () => {
     const shippingAddress = useSelector(selectShippingAddress)
     const paymentMethod= useSelector(selectPaymentMethod)
     const products = useSelector(selectCart);
-    
+    useEffect(() => {
+        document.title = "Order - FitVerse"
+
+    }, [])
     return (
         <Layout>
             <Stepper activeStep={3} />

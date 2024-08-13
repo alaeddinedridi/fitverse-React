@@ -3,6 +3,8 @@ import React,{useRef,useState,useEffect} from 'react'
 import axios from 'axios'
 import AdminLayout from '../../components/AdminLayout'
 import classes from '../../styles/Dashboard.module.scss'
+import { Helmet } from "react-helmet"
+
 const Dashboard = (props) => {
     const [products,setProducts]=useState([])
     const [nbrOfProducts,setNbrOfProducts]=useState(0)
@@ -20,6 +22,7 @@ const Dashboard = (props) => {
 
   
     useEffect(() => {
+        document.title = "Admin Dashboard - FitVerse"
         const {productsData}= axios.get('http://localhost:3001/products/read')
         setProducts(productsData)
         //setNbrOfProducts(products.length)
@@ -31,6 +34,7 @@ const Dashboard = (props) => {
 
     return (
         <AdminLayout>
+            
             <div className={classes.container}>
                 <div className={classes.card}>Number of products <div>{nbrOfProducts}</div></div>
                 <div className={classes.card}>Number of Orders <div>{nbrOfProducts}</div></div>

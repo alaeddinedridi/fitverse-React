@@ -17,6 +17,7 @@ const ProductDetails = () => {
         setProduct(data)
     }
     useEffect(() => {
+        document.title = "Product Details - FitVerse"
         console.log(id)
         fetch()
 

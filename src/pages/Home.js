@@ -1,7 +1,14 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import Layout from '../components/Layout'
 import classes from '../styles/Home.module.scss'
 const Home = () => {
+
+    useEffect(() => {
+        document.title = "Home - FitVerse"
+
+    }, [])
+
+
     return (
         <Layout>
             <section className={classes.container}>

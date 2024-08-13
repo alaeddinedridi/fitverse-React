@@ -19,6 +19,7 @@ const AllProducts = (props) => {
         
     }
     useEffect(() => {
+        document.title = "Admin Products - FitVerse"
         read()
         setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
     }, [whatWeAreSearchingFor])
@@ -29,7 +30,7 @@ const AllProducts = (props) => {
             <div className={classes.container}>
                 
                 <div className={classes.container__grid}>
-                    {filteredProducts && filteredProducts.map((product,index)=><Product key={index} product={product} />)} 
+                {filteredProducts.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} />) : products.map((product,index)=><Product key={index} product={product} />) } 
                 </div>
                 {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}
             </div> 

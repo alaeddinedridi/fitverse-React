@@ -39,6 +39,7 @@ const Shipping = () => {
     }
 
     useEffect(() => {
+        document.title = "Shipping Address - FitVerse"
         if (!user){
             navigate('/login?redirect=/shipping')
         }

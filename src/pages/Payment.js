@@ -21,6 +21,7 @@ const Payment = () => {
     const products = useSelector(selectCart);
     const user = useSelector(selectUser)
     useEffect(()=>{
+        document.title = "Payment Methods - FitVerse"
         console.log(shippingAddress)
         if (!shippingAddress.address){
             navigate('/shipping')

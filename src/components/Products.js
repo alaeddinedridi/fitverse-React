@@ -27,9 +27,12 @@ const Products = (props) => {
     }
     useEffect(() => {
         read()
-        setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
-        console.log("filtered products: "+filteredProducts)
-        console.log("this is whatWeAreSearchingFor: "+whatWeAreSearchingFor)
+        if (whatWeAreSearchingFor.length>0 && products.length>0){
+            setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
+            console.log("filtered products: "+filteredProducts)
+            console.log("this is whatWeAreSearchingFor: "+whatWeAreSearchingFor)
+        }
+        
     }, [whatWeAreSearchingFor])
 
     const toggleItems =(index)=>{
@@ -98,7 +101,7 @@ const Products = (props) => {
                 
             </div>
             <div className={classes.container__grid}>
-                {filteredProducts && filteredProducts.map((product,index)=><Product key={index} product={product} />)} 
+                {filteredProducts.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} />) : products.map((product,index)=><Product key={index} product={product} />) } 
             </div>
             {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}
         </div> 

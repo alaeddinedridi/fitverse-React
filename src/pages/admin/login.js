@@ -20,6 +20,8 @@ const Orders = (props) => {
         setorders(data)
     }
     useEffect(() => {
+        document.title = "Admin Login - FitVerse"
+
         read()
     }, [])
 

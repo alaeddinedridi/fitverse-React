@@ -31,57 +31,82 @@ const ProductUpload = () =>{
     const [productExist, setProductExist]= useState(false)
     const [pictures, setPictures] = useState([])
     let { id } = useParams();
-    const role = useSelector(selectUserRole);
     const user = useSelector(selectUser)
-    console.log("this is the role of the user: "+role)
+  
 
     const fetch=async()=>{
-      const { data } = await axios.get('http://localhost:3001/product/'+id)
-      console.log("fetched product"+data)
-      setProduct(data)
-    }
-
-    useEffect(async () => {
-      let exist
-      console.log(id)
-      await fetch()
-      for(var prop in product) {
-        console.log("this is prop: "+prop)
-        console.log("this is the product: "+product)
-        if(product.hasOwnProperty(prop)){
-          exist=true
-        }else{
-          exist=false
+      if (id != "undefined"){
+        const { data } = await axios.get('http://localhost:3001/product/'+id)
+        console.log("fetched product"+data)
+        setProduct(data)
+        for(var prop in product) {
+          console.log("this is prop: "+prop)
+          console.log("this is the product: "+product)
+          if(product.hasOwnProperty(prop)){
+            setProductExist(true)
+          }else{
+            setProductExist(false)
+          }
         }
         
       }
-      setProductExist(exist)
+      
+    }
+
+    useEffect(async () => {
+      document.title = "Admin Product Upload - FitVerse"
+
+      console.log("this is the id: "+id)
+      await fetch()
+     
+      
       console.log("exist ?"+productExist)
     }, [productExist])
     const submitHandler=async(formdata)=>{
 
+      const name=formdata.name
+      const category=formdata.category
+      const brand=formdata.brand
+      const price=formdata.price
+      const stock=formdata.stock
+      const description=formdata.description
+      //const role=user.user.role
+      let dataToBeSent={}
 
-      const data = new FormData()
-  
-      data.append("name",formdata.name);
-      data.append("category",formdata.category);
-      data.append("brand",formdata.brand);
-      data.append("price",formdata.price);
-      data.append("stock",formdata.stock);
-      data.append("description",formdata.description);
-      data.append("role",role);
-  
-     
-    
+      if (files.length>0) {
+        dataToBeSent = new FormData()
+        dataToBeSent.append("name",formdata.name);
+        dataToBeSent.append("category",formdata.category);
+        dataToBeSent.append("brand",formdata.brand);
+        dataToBeSent.append("price",formdata.price);
+        dataToBeSent.append("stock",formdata.stock);
+        dataToBeSent.append("description",formdata.description);
+        dataToBeSent.append("role",user.user.role);
+        console.log("those are files:"+Array.from(files))
+        Array.from(files).forEach((file, i) => {
+          dataToBeSent.append("files", file, file.name)
+        })
+        
+      }else{
+        dataToBeSent={
+          name,
+          category,
+          brand,
+          price,
+          stock,
+          description
+        }
+      }
     
       if (productExist){
+
         try{
           console.log("we are going to update the product")
-          console.log("this is the data to be sent: "+data)
-          const { res } = await axios.put('http://localhost:3001/product/update/'+id, data,
+          //console.log("this is the data to be sent: "+data)
+          const { res } = await axios.put('http://localhost:3001/product/update/'+id,dataToBeSent,
           {
             headers: {
-              authorization: `Bearer ${user.token}`,
+              authorization: `Bearer ${user.token}`
             }
           });
           console.log(res)
@@ -90,15 +115,9 @@ const ProductUpload = () =>{
             console.log(e.message)
         }
       }else{
-        if (files.length>0) {
-          console.log("those are files:"+Array.from(files))
-          //setProducts(Array.from(files))
-          Array.from(files).forEach((file, i) => {
-            data.append("files", file, file.name)
-          })
-        }
+
         try{
-          const { res } = await axios.post('http://localhost:3001/product/upload', data,
+          const { res } = await axios.post('http://localhost:3001/product/upload', dataToBeSent,
           {
             headers: {
               authorization: `Bearer ${user.token}`,

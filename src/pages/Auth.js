@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import Stepper from '../components/Stepper'
 import Login from '../components/Login'
 import Layout from '../components/Layout'
@@ -8,6 +8,12 @@ import formClasses from '../styles/Form.module.scss'
 import Register from '../components/Register'
 const Auth = () => {
     const [register, setRegister] = useState(false)
+
+    useEffect(() => {
+        document.title = "Authentication - FitVerse"
+
+    }, [])
+
     return (
         <Layout>
             <Stepper activeStep={0} />

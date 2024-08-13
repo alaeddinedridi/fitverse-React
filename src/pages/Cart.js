@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import CartItem from '../components/CartItem'
 import Layout from '../components/Layout'
 import Summary from '../components/Summary'
@@ -10,6 +10,12 @@ const Cart = () => {
     const dispatch = useDispatch();
     const products = useSelector(selectCart);
     const nbrCartItems = useSelector(selectNbrItems);
+
+    useEffect(() => {
+        document.title = "Cart - FitVerse"
+
+    }, [])
+
     return (
         <Layout>
             <div className={classes.container}>
