@@ -20,6 +20,8 @@ import Dashboard from './pages/admin/Dashboard';
 import AllProducts from './pages/admin/AllProducts';
 import Orders from './pages/admin/Orders';
 import Login from './pages/admin/login';
+import { ProtectedRoute } from './components/ProtectedRoute';
+
 function App() {
   const open=useSelector(selectToggle)
   return (
@@ -38,11 +40,11 @@ function App() {
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/admin/product-upload" element={<ProductUpload/>} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/products" element={<AllProducts />} />
-        <Route path="/admin/product/update/:id" element={<ProductUpload />} />
-        <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/product-upload" element={<ProtectedRoute><ProductUpload/></ProtectedRoute>} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/admin/products" element={<ProtectedRoute><AllProducts /></ProtectedRoute>} />
+        <Route path="/admin/product/update/:id" element={<ProtectedRoute><ProductUpload /></ProtectedRoute>} />
+        <Route path="/admin/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path="/admin/login" element={<Login />} />
       </Routes>
     </div>

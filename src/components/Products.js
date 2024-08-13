@@ -10,18 +10,27 @@ import {filterItems} from '../utils/filterItems'
 import {FiChevronDown} from 'react-icons/fi'
 import {BsChevronDown,BsChevronUp} from 'react-icons/bs'
 import axios from 'axios'
+import {searchForProduct,selectSearch} from '../redux/features/navbarSlice'
+
 const Products = (props) => {
     const linksContainerRef = useRef([]);
     const linksRef = useRef([]);
     const [show, setShow] = useState(true)
     const [products, setproducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
+
+    let whatWeAreSearchingFor= useSelector(selectSearch)
+
     const read = async ()=>{
         const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+props.category)
         setproducts(data)
     }
     useEffect(() => {
         read()
-    }, [])
+        setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
+        console.log("filtered products: "+filteredProducts)
+        console.log("this is whatWeAreSearchingFor: "+whatWeAreSearchingFor)
+    }, [whatWeAreSearchingFor])
 
     const toggleItems =(index)=>{
         console.log('this is the index '+index)
@@ -89,7 +98,7 @@ const Products = (props) => {
                 
             </div>
             <div className={classes.container__grid}>
-                {products && products.map((product,index)=><Product key={index} product={product} />)} 
+                {filteredProducts && filteredProducts.map((product,index)=><Product key={index} product={product} />)} 
             </div>
             {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}
         </div> 

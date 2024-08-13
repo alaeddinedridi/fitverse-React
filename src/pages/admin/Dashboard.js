@@ -19,13 +19,15 @@ const Dashboard = (props) => {
     }
 
   
-    useEffect(async() => {
-        await read()
-        setNbrOfProducts(products.length)
-        console.log(nbrOfProducts,products)
+    useEffect(() => {
+        const {productsData}= axios.get('http://localhost:3001/products/read')
+        setProducts(productsData)
+        //setNbrOfProducts(products.length)
+        //console.log(nbrOfProducts)
+        console.log(products)
         // nbrOfOrders=orders.length
         // nbrOfUsers=users.length
-    }, [nbrOfProducts])
+    }, [products])
 
     return (
         <AdminLayout>

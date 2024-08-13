@@ -29,13 +29,16 @@ const Product = (props) => {
     }
 
     useEffect(()=>{
-        console.log("this is the role :"+user.user.role)
-
-        if (user.user.role === "admin"){
-            setIsAdmin(true)
-        }else{
-            setIsAdmin(false)
+        
+        if (user!=null){
+            console.log("this is the role :"+user.user.role)
+            if (user.user.role === "admin"){
+                setIsAdmin(true)
+            }else{
+                setIsAdmin(false)
+            }
         }
+        
 
     },[])
 
