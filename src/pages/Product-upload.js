@@ -39,29 +39,33 @@ const ProductUpload = () =>{
         const { data } = await axios.get('http://localhost:3001/product/'+id)
         console.log("fetched product"+data)
         setProduct(data)
-        for(var prop in product) {
-          console.log("this is prop: "+prop)
-          console.log("this is the product: "+product)
-          if(product.hasOwnProperty(prop)){
-            setProductExist(true)
-          }else{
-            setProductExist(false)
-          }
-        }
+        setProductExist(true)
+        // for(var prop in product) {
+        //   console.log("this is prop: "+prop)
+        //   console.log("this is the product: "+product)
+        //   if(product.hasOwnProperty(prop)){
+        //     setProductExist(true)
+        //   }else{
+        //     setProductExist(false)
+        //   }
+        // }
         
+      }else{
+        setProductExist(false)
       }
       
     }
 
-    useEffect(async () => {
+    useEffect( () => {
       document.title = "Admin Product Upload - FitVerse"
 
       console.log("this is the id: "+id)
-      await fetch()
+      fetch()
      
       
       console.log("exist ?"+productExist)
-    }, [productExist])
+    }, [])
+
     const submitHandler=async(formdata)=>{
 
       const name=formdata.name
@@ -86,6 +90,7 @@ const ProductUpload = () =>{
         Array.from(files).forEach((file, i) => {
           dataToBeSent.append("files", file, file.name)
         })
+     
         
       }else{
         dataToBeSent={
