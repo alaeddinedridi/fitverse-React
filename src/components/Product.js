@@ -21,7 +21,7 @@ const Product = (props) => {
         try{
             const { res } = await axios.delete('http://localhost:3001/product/delete/'+id)
             console.log(res)
-
+            props.sendDataToParent(id)
            
         }catch(e){
             console.log(e.message)

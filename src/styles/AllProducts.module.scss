@@ -15,7 +15,16 @@
 
 .container{
     display: flex;
-    margin-top:2rem;
+}
+
+.filter_wrapper{
+    display: flex;
+    justify-content: end;
+    padding-right:.79rem;
+    .filter{
+        margin-left: .5rem;
+        cursor:pointer;
+    }
 }
 
 

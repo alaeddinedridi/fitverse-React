@@ -25,6 +25,15 @@ const Products = (props) => {
         const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+props.category)
         setproducts(data)
     }
+
+    const [idOfRemovedProduct, setIdOfRemovedProduct] = useState("");
+
+    const handleDataFromChild = (id) => {
+        setIdOfRemovedProduct(id);
+        console.log("this is the id of the removed product: "+id)
+        setproducts(products.filter(product=> product._id != id))
+    }
+
     useEffect(() => {
         read()
         if (whatWeAreSearchingFor.length>0 && products.length>0){
@@ -101,7 +110,7 @@ const Products = (props) => {
                 
             </div>
             <div className={classes.container__grid}>
-                {filteredProducts.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} />) : products.map((product,index)=><Product key={index} product={product} />) } 
+                {filteredProducts.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) : products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 
             </div>
             {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}
         </div> 
