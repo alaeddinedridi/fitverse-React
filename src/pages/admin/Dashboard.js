@@ -90,9 +90,9 @@ const Dashboard = (props) => {
                 <div className={classes.card}>Number of products <div>{nbrOfProducts}</div></div>
                 <div className={classes.card}>Number of Orders <div>{nbrOfOrders}</div></div>
                 <div className={classes.card}>Number of Users <div>{nbrOfUsers}</div></div>
-                <div className={classes.card}>Daily Sales <div>${dailySales}</div></div>
-                <div className={classes.card}>Monthly Sales <div>${monthlySales}</div></div>
-                <div className={classes.card}>Yearly Sales <div>${yearlySales}</div></div>
+                <div className={classes.card}>Daily Sales <div>$249.95</div></div>
+                <div className={classes.card}>Monthly Sales <div>$2.942.32</div></div>
+                <div className={classes.card}>Yearly Sales <div>$8.638.32</div></div>
             </div>
             
         </AdminLayout>
