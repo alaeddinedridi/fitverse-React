@@ -81,3 +81,36 @@
     text-transform: uppercase;
     margin-bottom: .5rem;
 }
+
+
+@media screen and (min-width:1367px) and (max-width:1920px) {
+  
+
+    .title{
+        font-size: 1.4rem;
+    }
+   
+    .description{
+        font-size: 1.35rem;
+    }
+    
+    .price{
+        font-size: 1.45rem;
+    }
+
+
+    .deleteBtn{ 
+        padding:.5em;
+        font-size: 1.3rem;
+        margin-bottom: .5rem;
+    }
+    
+    .updateBtn{
+        padding:.5em;
+        font-size: 1.3rem;
+    }
+
+    .img{
+        height:400px;
+    }
+}

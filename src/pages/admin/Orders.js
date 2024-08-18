@@ -54,11 +54,11 @@ const Orders = (props) => {
                     </div>)}
                     <div className={classes.footer}>
                         <div>
-                            <div><b>Fullname :</b> {order.shippingAddress.fullname}</div>
-                            <div><b>Address :</b> {order.shippingAddress.address}</div>
-                            <div><b>City :</b> {order.shippingAddress.city}</div>
-                            <div><b>Postal Code :</b> {order.shippingAddress.pcode}</div>
-                            <div><b>Country :</b> {order.shippingAddress.country}</div>
+                            <div className={classes.footer__elm}><b>Fullname :</b> {order.shippingAddress.fullname}</div>
+                            <div className={classes.footer__elm}><b>Address :</b> {order.shippingAddress.address}</div>
+                            <div className={classes.footer__elm}><b>City :</b> {order.shippingAddress.city}</div>
+                            <div className={classes.footer__elm}><b>Postal Code :</b> {order.shippingAddress.pcode}</div>
+                            <div className={classes.footer__elm}><b>Country :</b> {order.shippingAddress.country}</div>
                         </div>
                         <div className={classes.total}><b>Total : </b> ${order.price}</div>
                     </div>

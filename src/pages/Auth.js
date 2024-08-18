@@ -19,7 +19,7 @@ const Auth = () => {
             <Stepper activeStep={0} />
             
             <div className={classes.container}>
-                <div className={classes.cols}>
+                <div className={formClasses.cols}>
                     <div className={formClasses.left}>
                         {register ? <Register />:<Login />}
                         
@@ -27,11 +27,11 @@ const Auth = () => {
                     <div className={formClasses.right}>
                         {!register && <div>
                         <div className={formClasses.title}>Get an account now</div>
-                        <button onClick={()=>setRegister(true)} className={formClasses.auth_btn+" "+formClasses.not_main}>Register now</button>
+                            <button onClick={()=>setRegister(true)} className={formClasses.auth_btn+" "+formClasses.not_main}>Register now</button>
                         </div>}
                         {register && <div>
                         <div className={formClasses.title}>Login to your account now</div>
-                        <button onClick={()=>setRegister(false)} className={formClasses.auth_btn+" "+formClasses.not_main}>Login now</button>
+                            <button onClick={()=>setRegister(false)} className={formClasses.auth_btn+" "+formClasses.not_main}>Login now</button>
                         </div>}
                     </div>
                 </div>

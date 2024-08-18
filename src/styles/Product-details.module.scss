@@ -100,11 +100,42 @@
     font-size:1.1rem;
 }
 
+
+
+
+
+@media screen and (min-width:1367px) and (max-width:1920px) {
+    .left__img{
+        width:50%;
+        height:750px;
+    }
+
+    .right__img{
+        width:20%;
+        height:170px;
+    }
+
+    .container__right{
+        font-size: 1.7rem;
+    }
+
+    .btn{
+        padding:.5em;
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .container{
+        padding-top: 2rem;
+    }
+}
+
 @media screen and (max-width:1024px) {
     .container{
         flex-direction:column;
         align-items: center;
-        padding:0 5rem;
+        padding:0 1rem;
+
     }
     .container__right{
         width:100%;

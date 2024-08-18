@@ -6,7 +6,7 @@ const Card = (props) => {
     return (
         <div className={classes.container}>
             <h2 className={classes.title}>{title}</h2>
-            <div>{children}</div>
+            <div className={classes.content}>{children}</div>
             
         </div>
     )

@@ -76,3 +76,46 @@ input[type='file']{
     display: flex;
     /* justify-content: space-around; */
 }
+
+
+@media screen and (min-width:1367px) and (max-width:1920px) {
+  
+    .form__text_input{
+        padding:1em;
+        font-size:1.6rem;
+    }
+
+    .image_upload{
+        padding:1.9em 2.4em;
+        font-size: 1.7rem;
+    }
+    
+    
+    .upload_btn{
+        font-size: 1.5rem;
+        padding:1em 2em;
+    }
+    
+}
+
+
+@media screen and (max-width:820px){
+    .container__grid{
+        grid-template-columns: repeat(1,1fr);
+        width:95%;
+    }
+
+    .form{
+        flex-direction: column;
+    }   
+
+    .upload_wrapper{
+        margin-top:2rem;
+    }
+
+    .image_upload{
+        
+        margin:0 1rem 0 0;
+      
+    }
+}

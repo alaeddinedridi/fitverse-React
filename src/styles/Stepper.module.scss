@@ -39,6 +39,18 @@
     background-color: rgb(122, 121, 121);
 }
 
+@media screen and (min-width:1367px) and (max-width:1920px) {
+  .label{
+    font-size: 1.4rem;
+  }
+
+  .index{
+    font-size: 1.1rem;
+    padding:.8em;
+  }
+}
+
+
 @media screen and (max-width:665px) {
     .label{
         display:none;

@@ -11,3 +11,14 @@
     font-size:.9rem;
 }
 
+
+@media screen and (min-width:1367px) and (max-width:1920px) {
+    .title{
+        letter-spacing: 0.1rem;
+        font-size:1.4rem;
+    }
+
+    .content{
+        font-size: 1.3rem;
+    }
+}   

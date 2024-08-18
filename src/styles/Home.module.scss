@@ -1,5 +1,5 @@
 .container{
-    height:80.9vh;
+    height:77.8vh;
     display:flex;
     justify-content: space-between;
 }
@@ -24,4 +24,18 @@
         width:462px;
         height: 326px;
     }
+}
+
+@media screen and (min-width:1367px) and(max-width:1920px) {
+    .container{
+        height:84.5vh;
+    }
+    
+}
+
+@media screen and (max-width:1024px) {
+    .container{
+        height:89.2vh;
+    }
+    
 }

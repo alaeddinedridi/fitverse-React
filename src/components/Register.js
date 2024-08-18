@@ -44,7 +44,7 @@ const Register = () => {
         <div>
             <Toaster />
             <div className={classes.title}>Register</div>
-            <div>If you don't have an account, create one here.</div>
+            <div className={classes.subtitle}>If you don't have an account, create one here.</div>
             <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
                 <div className={classes.form__element}>
                     <input type="text" className={classes.form__text_input} placeholder="Fullname" {...register("fullname")} />

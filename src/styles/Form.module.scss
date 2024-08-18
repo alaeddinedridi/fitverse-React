@@ -121,3 +121,66 @@
     border-color:black;
 }
 
+.cols{
+    width:60%;
+    display: flex;
+}
+
+
+
+@media screen and (min-width:1367px) and (max-width:1920px){
+ 
+    .form__text_input{
+        padding:.8em;
+        font-size:1.4rem;
+    }
+
+    .title{
+        font-size: 1.6rem;
+    }
+
+    .subtitle,.agree{
+        font-size: 1.35rem;
+    }
+
+    .form__element label{
+        font-size: 1.35rem;
+    }
+
+    .forgot{
+        font-size: 1.4rem;
+    }
+
+    .auth_btn{
+        font-size: 1.5rem;
+        padding:.8em;
+    }
+
+    .option__header,.option__body{
+        font-size: 1.5rem;
+    }
+
+    .header__title{
+        font-size: 1.4rem;
+    }
+
+    
+
+}
+
+@media screen and (max-width:430px){
+ 
+    .cols{
+        width:100%;
+        flex-direction: column-reverse;
+      
+    }
+
+
+    .left{
+        width:100%;
+        margin-top: 2rem;
+    }
+
+ 
+}

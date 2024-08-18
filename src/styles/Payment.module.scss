@@ -75,6 +75,37 @@
     color:black;
 }
 
+
+@media screen and (min-width:1367px) and (max-width:1920px) {
+    .method .label{
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    .logo{
+        width:15%;
+        height:80px;
+        // background-color: yellow;
+    }
+
+
+    .btn{
+        font-size: 1.5rem;
+        padding:.8em;
+    }
+
+    .title{
+        font-size: 1.6rem;
+    }
+
+    .subtitle{
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+}
+
+
 @media screen and (max-width:1024px) {
     .container{
         flex-direction: column;

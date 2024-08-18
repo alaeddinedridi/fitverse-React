@@ -85,6 +85,25 @@
     // color:lightseagreen;
 }
 
+@media screen and (min-width:1367px) and (max-width:1920px) {
+    .header .title,.header .price{
+        font-size: 1.9rem;
+    }
+
+    .description, .footer{
+        font-size: 1.6rem;
+    }
+
+    .remove{
+        font-size: 1.9rem;
+    }
+
+    .cart_item__img{
+        width:25%;
+        height:320px;
+
+    }
+}
 
 @media screen and (max-width:1024px) {
     .container{

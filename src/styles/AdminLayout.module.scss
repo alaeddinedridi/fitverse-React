@@ -23,6 +23,17 @@
     cursor:pointer;
 }
 
+@media screen and (min-width:1367px) and (max-width:1920px) {
+  
+
+    .container__left{
+        width:25%;
+        padding:1em;
+        font-size: 1.6rem;
+    }
+   
+}
+
 
   @media screen and (max-width:1024px) {
       .container{

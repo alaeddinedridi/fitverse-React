@@ -54,7 +54,7 @@ const Login = () => {
         <div className={classes.wrapper}>
             <Toaster />
             <div className={classes.title}>Login</div>
-            <div>If you are a registered user, please enter your email and password.</div>
+            <div className={classes.subtitle}>If you are a registered user, please enter your email and password.</div>
             <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
                 <div className={classes.form__element}>
                     <input type="text" className={classes.form__text_input} placeholder="Email" {...register("email")} />

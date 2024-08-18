@@ -78,7 +78,7 @@ const Payment = () => {
                 <div className={classes.items}>
                     <form onSubmit={submitHandler}>
                         <div className={classes.title}>Payment Method</div>
-                        <div>All transactions are safe and secure</div>
+                        <div className={classes.subtitle}>All transactions are safe and secure</div>
                         <div className={classes.method}>
                             <div>
                                 <input type="radio" id="card" name="method" value="card" onChange={(e)=>setPaymentMethod(e.target.value)}/>
