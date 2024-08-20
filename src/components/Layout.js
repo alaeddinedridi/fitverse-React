@@ -1,5 +1,5 @@
 import React from 'react'
-import {MdLanguage} from 'react-icons/md'
+import {MdLanguage, MdOutlineLogout} from 'react-icons/md'
 import {GrLocation} from 'react-icons/gr'
 import {AiOutlineQuestionCircle} from 'react-icons/ai'
 import {GiHamburgerMenu} from 'react-icons/gi'
@@ -16,11 +16,15 @@ import {searchForProduct,selectSearch} from '../redux/features/navbarSlice'
 import { selectNbrItems,clear } from '../redux/features/cartSlice'
 import { selectUser,logout } from '../redux/features/authSlice'
 
+
+
 const Layout = (props) => {
     const dispatch=useDispatch()
     const navigate=useNavigate()
     let nbrOfItems = useSelector(selectNbrItems)
     let whatWeAreSearchingFor= useSelector(selectSearch)
+    const user = useSelector(selectUser)
+
 
     const logoutHandler=()=>{
         dispatch(logout())
@@ -48,8 +52,10 @@ const Layout = (props) => {
                     </div>
                     <div className={classes.navbar__right}>
                         <div className={classes.navbar__right__search_wrapper}><div><FiSearch className={classes.navbar__right__icon+" "+classes.nav_item} /></div><input type="search" placeholder="Search" value={whatWeAreSearchingFor} onChange={(e)=> dispatch(searchForProduct(e.target.value))} className={classes.search} /></div>
-                        <div className={classes.navbar__item}><BiUser onClick={logoutHandler} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
-                        <div className={classes.navbar__item}><FiHeart className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
+                        <div className={classes.navbar__item}><Link style={{ textDecoration: 'none',color:'black' }} to={user != null ? "/admin/dashboard" : "/admin/login"}><BiUser className={classes.navbar__right__icon+" "+classes.nav_item} /></Link></div> 
+                        {/* <div className={classes.navbar__item}><FiHeart className={classes.navbar__right__icon+" "+classes.nav_item} /></div> */}
+                        <div className={classes.navbar__item}><MdOutlineLogout onClick={logoutHandler} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
+
                         <div className={classes.navbar__item+" "+classes.navbar_item__cart}>{nbrOfItems>0 && <div className={classes.nbr_items}>{nbrOfItems}</div>}<BsHandbag onClick={()=>navigate('/cart')} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
                     </div>
                 </nav>

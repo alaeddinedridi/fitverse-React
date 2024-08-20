@@ -35,9 +35,14 @@ const Register = () => {
                 password,
             });
             console.log(data)
-            toast.success('Account created!')
+            toast.success('Account created!', {
+                duration: 10000,
+            });
+        
         }catch(e){
-            toast.error(e.message)
+            toast.error(e.message, {
+                duration: 10000,
+            });
         }
     }
     return (

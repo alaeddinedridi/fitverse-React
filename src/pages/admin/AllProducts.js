@@ -27,9 +27,14 @@ const AllProducts = (props) => {
 
     const handleCategoryFilter = async (category) =>{
         console.log("category: "+category)
-     
-        const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+category)
-        setproducts(data)
+        if (category==="all"){
+            const {data}=await axios.get('http://localhost:3001/products/read')
+            setproducts(data)
+        }else{
+            const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+category)
+            setproducts(data)
+        }
+        
     }
 
     const handleDataFromChild = (id) => {
@@ -55,6 +60,7 @@ const AllProducts = (props) => {
     return (
         <AdminLayout>
             <div className={classes.filter_wrapper}><label htmlFor='category'>Filter by:</label><select className={classes.filter} id="category" name="category" onChange={(e) => handleCategoryFilter(e.target.value)}>
+                    <option value="all">All</option>
                     <option value="watches">Watches</option>
                     <option value="women">Women</option>
                     <option value="men">Men</option>

@@ -10,6 +10,7 @@ import {selectUserRole} from '../redux/features/authSlice'
 import { selectUser } from '../redux/features/authSlice'
 import AdminLayout from '../components/AdminLayout';
 import {useParams} from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 
 const addProductSchema = yup.object({
   name: yup.string().required().min(3),
@@ -35,7 +36,8 @@ const ProductUpload = () =>{
   
 
     const fetch=async()=>{
-      if (id != "undefined"){
+      if (id != undefined){
+        console.log("this is the id not undefined: "+id)
         const { data } = await axios.get('http://localhost:3001/product/'+id)
         console.log("fetched product"+data)
         setProduct(data)
@@ -115,9 +117,15 @@ const ProductUpload = () =>{
             }
           });
           console.log(res)
+          toast.success('Product updated!', {
+            duration: 10000,
+          });
          
         }catch(e){
             console.log(e.message)
+            toast.error('Failed to update the product!', {
+              duration: 10000,
+            });
         }
       }else{
 
@@ -129,9 +137,15 @@ const ProductUpload = () =>{
             }
           });
           console.log(res)
+          toast.success('Product uploaded!', {
+            duration: 10000,
+          });
          
         }catch(e){
             console.log(e.message)
+            toast.error('Failed to upload the product!', {
+              duration: 10000,
+            });
         }
       }
       
@@ -145,6 +159,7 @@ const ProductUpload = () =>{
   return (
     <AdminLayout>
       <div className={classes.container}>
+      <Toaster />
       <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <div className={classes.left_wrapper}>
 
