@@ -12,6 +12,7 @@ import { readAllProducts, selectAllProductsData } from '../../redux/features/pro
 
 const AllProducts = (props) => {
     const [products, setproducts] = useState([])
+    const [categoryProducts, setCategoryProducts] = useState(false)
     const [filteredProducts, setFilteredProducts] = useState([])
     let whatWeAreSearchingFor= useSelector(selectSearch)
     let productsdata= useSelector(selectAllProductsData)
@@ -30,10 +31,16 @@ const AllProducts = (props) => {
         if (category==="all"){
             const {data}=await axios.get('http://localhost:3001/products/read')
             setproducts(data)
+            //setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
         }else{
             const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+category)
             setproducts(data)
+            //setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
         }
+
+        setCategoryProducts(true)
+        
+      
         
     }
 
@@ -69,7 +76,10 @@ const AllProducts = (props) => {
             <div className={classes.container}>
                 
                 <div className={classes.container__grid}>
-                {filteredProducts.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) : products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 
+                {filteredProducts.length>0 && !categoryProducts? 
+                filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) 
+                : 
+                products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 
                 </div>
                 {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}
             </div> 

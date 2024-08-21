@@ -27,6 +27,7 @@ const Dashboard = (props) => {
     }
 
   
+
     useEffect(async () => {
         document.title = "Admin Dashboard - FitVerse"
         try{
@@ -48,7 +49,7 @@ const Dashboard = (props) => {
            
             setProducts(productsData.data)
             console.log(productsData.data)
-          
+            
             setOrders(ordersData.data)
            
             setUsers(usersData.data)
@@ -87,9 +88,9 @@ const Dashboard = (props) => {
         <AdminLayout>
             
             <div className={classes.container}>
-                <div className={classes.card}>Number of products <div>{nbrOfProducts}</div></div>
-                <div className={classes.card}>Number of Orders <div>{nbrOfOrders}</div></div>
-                <div className={classes.card}>Number of Users <div>{nbrOfUsers}</div></div>
+                <div className={classes.card}>Number of products <div>{products && nbrOfProducts}</div></div>
+                <div className={classes.card}>Number of Orders <div>{orders && nbrOfOrders}</div></div>
+                <div className={classes.card}>Number of Users <div>{users && nbrOfUsers}</div></div>
                 <div className={classes.card}>Daily Sales <div>$249.95</div></div>
                 <div className={classes.card}>Monthly Sales <div>$2.942.32</div></div>
                 <div className={classes.card}>Yearly Sales <div>$8.638.32</div></div>

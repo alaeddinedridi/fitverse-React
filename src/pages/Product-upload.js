@@ -23,7 +23,7 @@ const addProductSchema = yup.object({
 
 const ProductUpload = () =>{
 
-    const {handleSubmit,register,formState: { errors }} = useForm({
+    const {handleSubmit,register,reset,formState: { errors }} = useForm({
       resolver: yupResolver(addProductSchema)
     });
 
@@ -42,6 +42,7 @@ const ProductUpload = () =>{
         console.log("fetched product"+data)
         setProduct(data)
         setProductExist(true)
+        
         // for(var prop in product) {
         //   console.log("this is prop: "+prop)
         //   console.log("this is the product: "+product)
@@ -58,15 +59,40 @@ const ProductUpload = () =>{
       
     }
 
+    // useForm({
+    //   defaultValues: {
+    //     name: 'a',
+    //     category: 'd',
+    //     brand: '',
+    //     price: '',
+    //     stock: '',
+    //     description: ''
+    //   }
+    // })
+
+    let defaultProduct={
+      name: product.name,
+      category: product.category,
+      brand: product.brand,
+      price: product.price,
+      stock: product.countInStock,
+      description: product.description
+    }
+
     useEffect( () => {
       document.title = "Admin Product Upload - FitVerse"
 
       console.log("this is the id: "+id)
       fetch()
-     
       
       console.log("exist ?"+productExist)
     }, [])
+
+    useEffect( ()=> {
+      if (productExist){
+        reset({...defaultProduct});
+      }
+    },[productExist])
 
     const submitHandler=async(formdata)=>{
 
@@ -164,11 +190,11 @@ const ProductUpload = () =>{
         <div className={classes.left_wrapper}>
 
           <div className={classes.form__element}>
-              <input type="text" defaultValue={productExist? product.name:""} className={classes.form__text_input} placeholder="Name" {...register("name")} />
+              <input type="text" className={classes.form__text_input} placeholder="Name" {...register("name")} />
           </div>
         
           <div className={classes.form__element}>
-            <select name="category" defaultValue={productExist? product.category:""} className={classes.form__text_input} id="category" {...register("category")}>
+            <select name="category" className={classes.form__text_input} id="category" {...register("category")}>
               <option value="watches">Watches</option>
               <option value="women">Women</option>
               <option value="men">Men</option>
@@ -177,16 +203,16 @@ const ProductUpload = () =>{
 
           </div>
           <div className={classes.form__element}>
-              <input type="text" defaultValue={productExist? product.brand:""} className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
+              <input type="text" className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
           </div>
           <div className={classes.form__element}>
-              <input type="text" defaultValue={productExist? product.price:""} className={classes.form__text_input} placeholder="Price" {...register("price")} />
+              <input type="text" className={classes.form__text_input} placeholder="Price" {...register("price")} />
           </div>
           <div className={classes.form__element}>
-              <input type="text" defaultValue={productExist? product.countInStock:""} className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
+              <input type="text" className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
           </div>
           <div className={classes.form__element}>
-            <textarea className={classes.form__text_area} defaultValue={productExist? product.description:""} name="description" placeholder="Write a description" rows="4" cols="50" {...register("description")}></textarea>
+            <textarea className={classes.form__text_area} name="description" placeholder="Write a description" rows="4" cols="50" {...register("description")}></textarea>
           </div>
         </div>
         <div className={classes.upload_wrapper}>
