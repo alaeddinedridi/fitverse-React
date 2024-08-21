@@ -28,6 +28,7 @@ const AllProducts = (props) => {
 
     const handleCategoryFilter = async (category) =>{
         console.log("category: "+category)
+        
         if (category==="all"){
             const {data}=await axios.get('http://localhost:3001/products/read')
             setproducts(data)
@@ -38,8 +39,7 @@ const AllProducts = (props) => {
             //setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
         }
 
-        setCategoryProducts(true)
-        
+        dispatch(searchForProduct(""))
       
         
     }
@@ -76,7 +76,7 @@ const AllProducts = (props) => {
             <div className={classes.container}>
                 
                 <div className={classes.container__grid}>
-                {filteredProducts.length>0 && !categoryProducts? 
+                {filteredProducts.length>0 ?
                 filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) 
                 : 
                 products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 

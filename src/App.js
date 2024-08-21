@@ -21,6 +21,7 @@ import AllProducts from './pages/admin/AllProducts';
 import Orders from './pages/admin/Orders';
 import Login from './pages/admin/login';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import Users from './pages/admin/Users';
 
 function App() {
   const open=useSelector(selectToggle)
@@ -46,6 +47,7 @@ function App() {
         <Route path="/admin/product/update/:id" element={<ProtectedRoute><ProductUpload /></ProtectedRoute>} />
         <Route path="/admin/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/users" element={<Users />} />
       </Routes>
     </div>
   );
