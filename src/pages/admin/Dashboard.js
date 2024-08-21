@@ -11,6 +11,7 @@ const Dashboard = (props) => {
     const [nbrOfProducts,setNbrOfProducts]=useState(0)
     const [nbrOfOrders,setNbrOfOrders]=useState(0)
     const [nbrOfUsers,setNbrOfUsers]=useState(0)
+    const [fetched,setFetched]=useState(false)
     const [orders,setOrders]=useState([])
     const [users,setUsers]=useState([])
     const [dailySales, setDailySales]=useState(0)
@@ -24,12 +25,16 @@ const Dashboard = (props) => {
         // setOrders(orders)
         // const {users}=await axios.get('http://localhost:3001/users/read')
         // setUsers(users)
+      
+
     }
 
-  
+    
 
     useEffect(async () => {
         document.title = "Admin Dashboard - FitVerse"
+
+        
         try{
             // Make multiple API calls at the same time
             const [productsData, ordersData, usersData] = await Promise.all([
@@ -46,6 +51,8 @@ const Dashboard = (props) => {
                 })
 
             ])
+
+           
            
             setProducts(productsData.data)
             console.log(productsData.data)
@@ -77,12 +84,14 @@ const Dashboard = (props) => {
             // }
             // setDailySales(dailyOrderPrice)
             
-           
+           if (!fetched){
+            setFetched(true)
+           }
         }catch(e){
             console.log(e.message)
         }
         
-    }, [])
+    }, [fetched])
 
     return (
         <AdminLayout>
