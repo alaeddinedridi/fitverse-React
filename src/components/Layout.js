@@ -15,8 +15,9 @@ import {toggle} from '../redux/features/sidebarSlice'
 import {searchForProduct,selectSearch} from '../redux/features/navbarSlice'
 import { selectNbrItems,clear } from '../redux/features/cartSlice'
 import { selectUser,logout } from '../redux/features/authSlice'
-
-
+import {FaFacebookF,FaTwitter,FaYoutube,FaInstagram,FaLinkedinIn,FaWeibo} from 'react-icons/fa'
+import {RiWechatFill} from 'react-icons/ri'
+import { footerItems } from '../utils/footerItems'
 
 const Layout = (props) => {
     const dispatch=useDispatch()
@@ -63,7 +64,27 @@ const Layout = (props) => {
             <main>
                 {props.children}
             </main>
-            <footer></footer>
+            <footer>
+                <div className={classes.col_left + " " + classes.interline}>
+                    {footerItems.map((item,index)=><span className={classes.word} key={index}>{item}</span>)}
+                </div>
+                <div className={classes.col_right}>
+                    <div>
+                        <div>Email: contact@fitverse.com</div>
+                        <div>Phone: (+216) 26210996</div>
+                    </div>
+                    <div className={classes.icons}>
+                        <FaFacebookF className={classes.icon}/>
+                        <FaTwitter className={classes.icon}/>
+                        <FaYoutube className={classes.icon}/>
+                        <FaInstagram className={classes.icon}/>
+                        <FaLinkedinIn className={classes.icon}/>
+                        <FaWeibo className={classes.icon}/>
+                        <RiWechatFill className={classes.icon}/>
+                    </div>
+                    
+                </div>
+            </footer>
         </div>
     )
 }

@@ -18,7 +18,7 @@ const schema = yup.object({
     fullname: yup.string().required().min(2),
     address: yup.string().required().min(2),
     city: yup.string().required().min(2),
-    pcode: yup.string().required().min(2),
+    pcode: yup.number().required().min(2),
     country: yup.string().required().min(2)
 });
 

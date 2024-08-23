@@ -67,22 +67,40 @@ const Dashboard = (props) => {
             setNbrOfOrders(orders.length)
             setNbrOfUsers(users.length)
 
-            // let dateAndPriceOrders= orders.map(order=> {
-            //     const date = order.createdAt.substring(0,order.createdAt.indexOf('T'))
-            //     const price = order.total
-            //     return {date,price}
-            // })
-            // console.log(dateAndPriceOrders)
+            let dateAndPriceOrders= orders.map(order=> {
+                const date = order.createdAt.substring(0,order.createdAt.indexOf('T'))
+                const price = order.total
+                return {date,price}
+            })
+            console.log("those are dateAndPriceOrders: "+dateAndPriceOrders)
 
             // const firstItemDate=dateAndPriceOrders[0].date
             // let dailyOrderPrice=dateAndPriceOrders[0].price
+            let similarDates=[]
+            let dailyDates=[]
+            dateAndPriceOrders.map((elementI,i)=>{
 
-            // for (let i=1;i<dateAndPriceOrders;i++){
-            //     if (firstItemDate === dateAndPriceOrders[i].date){
-            //         dailyOrderPrice+=dateAndPriceOrders[i].price
-            //     }
-            // }
-            // setDailySales(dailyOrderPrice)
+            
+                // console.log("inside i")
+                dateAndPriceOrders.map((elementJ,j)=>{
+                  
+                    // console.log("the i date:"+elementI.date)
+                    // console.log("the j date:"+elementJ.date)
+                    if (elementI.date === elementJ.date){
+                        similarDates.push(elementJ)
+                        
+                        //dailyOrderPrice+=dateAndPriceOrders[i].price
+                    }
+                })
+                console.log("those are similar dates: ")
+                similarDates.map(similarDate=>console.log(similarDate.date))
+                let currentElement=elementI
+                dailyDates.push({i:similarDates})
+                
+            })
+            console.log("those are daily dates:")
+            dailyDates.map(dailyDate=>console.log(dailyDate))
+            //setDailySales(dailyOrderPrice)
             
            if (!fetched){
             setFetched(true)
