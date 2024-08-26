@@ -14,7 +14,7 @@ const Dashboard = (props) => {
     const [fetched,setFetched]=useState(false)
     const [orders,setOrders]=useState([])
     const [users,setUsers]=useState([])
-    const [dailySales, setDailySales]=useState(0)
+    const [averageDailySales, setAverageDailySales]=useState(0)
     const [monthlySales, setMonthlySales]=useState(0)
     const [yearlySales, setYearlySales]=useState(0)
 
@@ -67,6 +67,7 @@ const Dashboard = (props) => {
             setNbrOfOrders(orders.length)
             setNbrOfUsers(users.length)
 
+            // calculate daily sales
             let dateAndPriceOrders= orders.map(order=> {
                 const date = order.createdAt.substring(0,order.createdAt.indexOf('T'))
                 const price = order.total
@@ -76,32 +77,43 @@ const Dashboard = (props) => {
 
             // const firstItemDate=dateAndPriceOrders[0].date
             // let dailyOrderPrice=dateAndPriceOrders[0].price
-            let similarDates=[]
-            let dailyDates=[]
-            dateAndPriceOrders.map((elementI,i)=>{
-
             
+            let dailyAvgPrices=[]
+            dateAndPriceOrders.map((elementI,i)=>{
+                console.log("this is i: "+i)
+                let similarDates=[]
                 // console.log("inside i")
                 dateAndPriceOrders.map((elementJ,j)=>{
-                  
+                    console.log("this is j: "+j)
                     // console.log("the i date:"+elementI.date)
                     // console.log("the j date:"+elementJ.date)
                     if (elementI.date === elementJ.date){
                         similarDates.push(elementJ)
-                        
+                        dateAndPriceOrders.splice(j, 1);
+                        console.log("those are similar dates: elementI.date = "+elementI.date+" and elementJ.date = "+elementJ.date)
                         //dailyOrderPrice+=dateAndPriceOrders[i].price
                     }
                 })
-                console.log("those are similar dates: ")
+                
+                let dailySales=0
+
                 similarDates.map(similarDate=>console.log(similarDate.date))
+                similarDates.map(similarDate=>{
+                    dailySales+=similarDate.price
+                })
+                
                 let currentElement=elementI
-                dailyDates.push({i:similarDates})
+                dailyAvgPrices.push(dailySales/similarDates.length)
                 
             })
             console.log("those are daily dates:")
-            dailyDates.map(dailyDate=>console.log(dailyDate))
+            let totalDailyAvgPrice=0
+            dailyAvgPrices.map(dailyAvgPrice=>{
+                totalDailyAvgPrice+=dailyAvgPrice
+            })
             //setDailySales(dailyOrderPrice)
-            
+            setAverageDailySales((totalDailyAvgPrice/dailyAvgPrices.length).toFixed(2))
+
            if (!fetched){
             setFetched(true)
            }
@@ -118,7 +130,7 @@ const Dashboard = (props) => {
                 <div className={classes.card}>Number of products <div>{products && nbrOfProducts}</div></div>
                 <div className={classes.card}>Number of Orders <div>{orders && nbrOfOrders}</div></div>
                 <div className={classes.card}>Number of Users <div>{users && nbrOfUsers}</div></div>
-                <div className={classes.card}>Daily Sales <div>$249.95</div></div>
+                <div className={classes.card}>Daily Sales <div>${averageDailySales}</div></div>
                 <div className={classes.card}>Monthly Sales <div>$2.942.32</div></div>
                 <div className={classes.card}>Yearly Sales <div>$8.638.32</div></div>
             </div>
