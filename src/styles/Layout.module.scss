@@ -121,24 +121,26 @@
 
 footer{
     display:flex;
-    padding:2rem;
-    // background-color: rgba(24,24,24,255);
+    padding:1rem 2rem 1rem 1rem;
+    //background-color: green;
+    justify-content: space-between;
     // color:white;
 }
 
 
 
 .col_left{
-    width:71%;
+    width:20%;
+    
     display: flex;
     // justify-content: space-between;
     font-size: 1rem;
-    text-transform: uppercase;
     flex-flow: wrap;
     // flex-wrap:wrap;
     // background-color: orchid;
     // white-space:nowrap;
-
+    //background-color: yellow;
+    text-transform: uppercase;
 }
 
 .interline{
@@ -146,30 +148,70 @@ footer{
     // font-size: .9rem;
 }
 
+.col_middle{
+    display: flex;
+    // justify-content: space-between;
+    font-size: 1rem;
+    flex-flow: wrap;
+    //background-color: red;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
 .col_right{
     width:20%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    //background-color: aqua;
+    align-items: center;
 }
 
-.icons{
-    display: flex;
-    justify-content: space-between;
+.col_right__elem + .col_right__elem{
+    margin-top: 1rem;
+  
+}
+
+.col_right__elem{
+    font-size: .9rem;
 }
 
 .icon{
     font-size: 1.4rem;
+    cursor:pointer;
+}
+
+.word + .word{
+    margin-left:2rem;
+    cursor: pointer;
 }
 
 .word{
-    margin-right:2rem;
-    cursor: pointer;
+    font-size: .9rem;
 }
 
 
 
 
 @media screen and (min-width:1367px) and (max-width:1920px){
+
+    footer{
+        padding:1rem 2rem 1rem 2rem;
+    }
+
+    .col_left{
+        width: 25%;
+    }
+
+    .col_right__elem, .word{
+        font-size: 1.5rem;
+    }
+
+    .icon{
+        font-size: 2.1rem;
+    }
+
     .header{
         font-size: 1.5rem;
     }
@@ -262,6 +304,32 @@ footer{
  
     .col_left{
         font-size: .8rem;
+        width:100%;
+        justify-content: center;
     }
+
+    .col_middle, .col_right{
+        width: 100%;
+    }
+
+    .word + .word{
+        margin-left:0;
+    }
+
+    .col_middle{
+        justify-content: space-between;
+    }
+
+    footer{
+        flex-direction: column;
+    }
+
+    .col_right__elem + .col_right__elem{
+        margin-top: 0;
+      
+    }
+
+   
+
 
 }

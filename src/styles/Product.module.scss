@@ -61,7 +61,7 @@
 .deleteBtn{
     width:100%;
     padding:.5rem;
-    background-color:rgb(240, 105, 128);
+    background-color:black;
     color:white;
     cursor:pointer;
     border:1px solid black;
@@ -73,13 +73,13 @@
 .updateBtn{
     width:100%;
     padding:.5rem;
-    background-color:rgb(238, 164, 86);
-    color:white;
+    background-color:white;
+    color:black;
     cursor:pointer;
     border:1px solid black;
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: .5rem;
+    margin-top: .5rem;
 }
 
 

@@ -66,22 +66,21 @@ const Layout = (props) => {
             </main>
             <footer>
                 <div className={classes.col_left + " " + classes.interline}>
+                    <div className={classes.col_right__elem}>Email: contact@fitverse.com</div>
+                    <div className={classes.col_right__elem}>Phone: (+216) 26210996</div>
+                </div>
+                <div className={classes.col_middle}>
                     {footerItems.map((item,index)=><span className={classes.word} key={index}>{item}</span>)}
                 </div>
                 <div className={classes.col_right}>
-                    <div>
-                        <div>Email: contact@fitverse.com</div>
-                        <div>Phone: (+216) 26210996</div>
-                    </div>
-                    <div className={classes.icons}>
-                        <FaFacebookF className={classes.icon}/>
-                        <FaTwitter className={classes.icon}/>
-                        <FaYoutube className={classes.icon}/>
-                        <FaInstagram className={classes.icon}/>
-                        <FaLinkedinIn className={classes.icon}/>
-                        <FaWeibo className={classes.icon}/>
-                        <RiWechatFill className={classes.icon}/>
-                    </div>
+                 
+                    
+                    <FaFacebookF className={classes.icon}/>
+                    <FaTwitter className={classes.icon}/>
+                    <FaYoutube className={classes.icon}/>
+                    <FaInstagram className={classes.icon}/>
+                    <FaLinkedinIn className={classes.icon}/>
+
                     
                 </div>
             </footer>
