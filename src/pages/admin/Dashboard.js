@@ -74,9 +74,6 @@ const Dashboard = (props) => {
                 return {date,price}
             })
             console.log("those are dateAndPriceOrders: "+dateAndPriceOrders)
-
-            // const firstItemDate=dateAndPriceOrders[0].date
-            // let dailyOrderPrice=dateAndPriceOrders[0].price
             
             let dailyAvgPrices=[]
             dateAndPriceOrders.map((elementI,i)=>{
@@ -114,6 +111,32 @@ const Dashboard = (props) => {
             //setDailySales(dailyOrderPrice)
             setAverageDailySales((totalDailyAvgPrice/dailyAvgPrices.length).toFixed(2))
 
+            // calculate monthly sales
+
+            let today = new Date();
+            let year = today.getFullYear();
+            console.log("this is year:"+year)
+            let monthlyAvgPrices=0
+            let monthlyPrices=0
+
+            dateAndPriceOrders.map(dateAndPriceOrder=>{
+                console.log("this is sub year:"+dateAndPriceOrder.date.substring(0,4))
+                if (dateAndPriceOrder.date.substring(0,4) == year){
+                    monthlyPrices+=dateAndPriceOrder.price
+                    console.log("monthly prices: "+monthlyPrices)
+                }
+            })
+
+            monthlyAvgPrices=monthlyPrices/12
+            console.log("monthly average: "+monthlyAvgPrices)
+            setMonthlySales(monthlyAvgPrices.toFixed(2))
+
+            
+            setYearlySales(monthlyPrices.toFixed(2))
+
+
+
+
            if (!fetched){
             setFetched(true)
            }
@@ -131,8 +154,8 @@ const Dashboard = (props) => {
                 <div className={classes.card}>Number of Orders <div>{orders && nbrOfOrders}</div></div>
                 <div className={classes.card}>Number of Users <div>{users && nbrOfUsers}</div></div>
                 <div className={classes.card}>Daily Sales <div>${averageDailySales}</div></div>
-                <div className={classes.card}>Monthly Sales <div>$2.942.32</div></div>
-                <div className={classes.card}>Yearly Sales <div>$8.638.32</div></div>
+                <div className={classes.card}>Monthly Sales <div>${monthlySales}</div></div>
+                <div className={classes.card}>Yearly Sales <div>${yearlySales}</div></div>
             </div>
             
         </AdminLayout>
