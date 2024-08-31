@@ -21,7 +21,7 @@ const Cart = () => {
             <div className={classes.container}>
                 <div className={classes.items}>
                     {nbrCartItems > 0 ? products.map((cartItem,index)=><CartItem key={index} item={cartItem} />):
-                    <div>Cart is empty. <Link to="/collections" style={{textDecoration:"none",color:"black"}}><span className={classes.link}>Go shopping</span></Link></div>}
+                    <div>Cart is empty. <Link to="/watches" style={{textDecoration:"none",color:"black"}}><span className={classes.link}>Go shopping</span></Link></div>}
                 </div>
                 <div className={classes.summary}>
                     <Summary />

@@ -103,7 +103,7 @@ const Shipping = () => {
                             <p className='message'>{errors.city?.message}</p>
                         </div>
                         <div className={formClasses.form__element}>
-                            <input type="text" className={formClasses.form__text_input} placeholder="Postal Code" {...register("pcode")}/>
+                            <input type="number" className={formClasses.form__text_input} placeholder="Postal Code" {...register("pcode")}/>
                             <p className='message'>{errors.pcode?.message}</p>
                         </div>
                         <div className={formClasses.form__element}>

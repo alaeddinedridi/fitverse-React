@@ -131,10 +131,11 @@ const Dashboard = (props) => {
             console.log("monthly average: "+monthlyAvgPrices)
             setMonthlySales(monthlyAvgPrices.toFixed(2))
 
-            
+
+            // yearly sales
             setYearlySales(monthlyPrices.toFixed(2))
 
-
+            //console.log("try daily another way: "+monthlyAvgPrices/30)
 
 
            if (!fetched){

@@ -206,10 +206,10 @@ const ProductUpload = () =>{
               <input type="text" className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
           </div>
           <div className={classes.form__element}>
-              <input type="text" className={classes.form__text_input} placeholder="Price" {...register("price")} />
+              <input type="number" className={classes.form__text_input} placeholder="Price" {...register("price")} />
           </div>
           <div className={classes.form__element}>
-              <input type="text" className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
+              <input type="number" className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
           </div>
           <div className={classes.form__element}>
             <textarea className={classes.form__text_area} name="description" placeholder="Write a description" rows="4" cols="50" {...register("description")}></textarea>
