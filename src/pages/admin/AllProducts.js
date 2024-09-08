@@ -13,6 +13,8 @@ import { readAllProducts, selectAllProductsData } from '../../redux/features/pro
 const AllProducts = (props) => {
     const [products, setproducts] = useState([])
     const [categoryProducts, setCategoryProducts] = useState(false)
+    const [theCategory, setTheCategory] = useState("")
+
     const [filteredProducts, setFilteredProducts] = useState([])
     let whatWeAreSearchingFor= useSelector(selectSearch)
     let productsdata= useSelector(selectAllProductsData)
@@ -56,7 +58,7 @@ const AllProducts = (props) => {
         console.log("call function")
         //dispatch(readAllProducts())
         read()
-
+    
         //setproducts(productsdata)
         console.log("products : "+productsdata)
         console.log("products: "+products)
@@ -76,7 +78,7 @@ const AllProducts = (props) => {
             <div className={classes.container}>
                 
                 <div className={classes.container__grid}>
-                {filteredProducts.length>0 ?
+                {whatWeAreSearchingFor.length>0 ?
                 filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) 
                 : 
                 products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 

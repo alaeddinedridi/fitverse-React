@@ -19,7 +19,13 @@ const Product = (props) => {
     const remove =async (id)=>{
     
         try{
-            const { res } = await axios.delete('http://localhost:3001/product/delete/'+id)
+            const { res } = await axios.delete('http://localhost:3001/product/delete/'+id,
+            {
+                headers: {
+                  authorization: `Bearer ${user.token}`,
+                },
+            }
+            )
             console.log(res)
             props.sendDataToParent(id)
            

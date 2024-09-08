@@ -110,7 +110,7 @@ const Products = (props) => {
                 
             </div>
             <div className={classes.container__grid}>
-                {filteredProducts.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) : products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 
+                {whatWeAreSearchingFor.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) : products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 
             </div>
             {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}
         </div> 

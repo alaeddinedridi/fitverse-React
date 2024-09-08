@@ -206,7 +206,7 @@ const ProductUpload = () =>{
               <input type="text" className={classes.form__text_input} placeholder="Brand" {...register("brand")} />
           </div>
           <div className={classes.form__element}>
-              <input type="number" className={classes.form__text_input} placeholder="Price" {...register("price")} />
+              <input type="number" step="0.001" className={classes.form__text_input} placeholder="Price" {...register("price")} />
           </div>
           <div className={classes.form__element}>
               <input type="number" className={classes.form__text_input} placeholder="Stock" {...register("stock")} />
