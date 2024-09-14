@@ -16,6 +16,8 @@ const Auth = () => {
 
     return (
         <Layout>
+            {/* In order to purshase products, the user first have to login and if he does not have an account, he has to create one */}
+            {/* This is the first step */}
             <Stepper activeStep={0} />
             
             <div className={classes.container}>

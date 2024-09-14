@@ -15,14 +15,26 @@ import { selectUser } from '../redux/features/authSlice'
 
 const Payment = () => {
     const navigate = useNavigate()
+
+    // Get shippingAddress from redux "checkoutSlice"
     const shippingAddress = useSelector(selectShippingAddress)
+
+    // Use this to save data in redux
     const dispatch=useDispatch()
+
     const [paymentMethod, setPaymentMethod] = useState("")
+
+    // Get the products from cart (from redux "cartSlice")
     const products = useSelector(selectCart);
+    
+    // Get user from redux "authSlice"
     const user = useSelector(selectUser)
+
     useEffect(()=>{
         document.title = "Payment Methods - FitVerse"
         console.log(shippingAddress)
+        // While page is loading, check if the shipping address is set or not, if not redirect back user to shipping page 
+        // if the shipping address was saved in redux, then display this page to choose the payment method
         if (!shippingAddress.address){
             navigate('/shipping')
         }else{
@@ -30,20 +42,34 @@ const Payment = () => {
         }
 
     },[])
+
+    // round is used to round a float number 123.456 => 123.46
     const round = (num)=>{
-        return Math.round(num * 100 + Number.EPSILON) / 100; // 123.456 => 123.46
+        return Math.round(num * 100 + Number.EPSILON) / 100; 
     }
+
+    // Get the number of products in cart, we get it from redux "cartSlice"
     const nbrCartItems = useSelector(selectNbrItems);
+    // Get the total price of products without tax .. from redux "cartSlice"
     const price = round(parseFloat(useSelector(selectTotal)));
+    // Calculate the shipping price, is the total price of products without tax is more than 100$ then the shipping is free otherwise user has to pay 15$ for shipping
     const shippingPrice=price > 100 ? 0 : 15
+    // Calculate the tax, it's 15% of total price of products
     const tax = round(price * 0.15)
+    // Calculate the final price that user will pay
     const total = round(price + shippingPrice + tax)
+
     const submitHandler=async(e)=>{
         e.preventDefault()
+        // Check if user choosed a payment method, otherwise display an error message
         if (!paymentMethod){
             toast.error("Payment method is required!")
         }else{
+            // If user choosed the payment method, then save it in redux "checkoutSlice"
             dispatch(savePaymentMethod(paymentMethod))
+
+            // Save the order in database, including saving picked products, shippingAddress, payment method, price of products without tax,shipping price, tax and total price to be paid
+            // Use axios to send a request
             try{
                 const { data } = await axios.post('http://localhost:3001/order/create', {
                     orderItems:products,
@@ -54,6 +80,7 @@ const Payment = () => {
                     tax,
                     total,
                 },
+                // Inside the save order request, send the user token, so in the backend, it can check if the user is logged in and his role is user
                 {
                     headers: {
                       authorization: `Bearer ${user.token}`,
@@ -61,9 +88,11 @@ const Payment = () => {
                 }
                 );
                 console.log(user.token)
+                // if the order was successfully saved then take the user to order page so he can pay the order
                 console.log("saved the order")
                 navigate('/order')
             }catch(e){
+                // if the order has failed, then display a notification error
                 toast.error(e.message)
             }
             
@@ -72,10 +101,13 @@ const Payment = () => {
     }
     return (
         <Layout>
+            {/* This is the third step */}
+            {/* In this page, user will choose the payment method */}
             <Stepper activeStep={2} />
             <div className={classes.container}>
                 <Toaster />
                 <div className={classes.items}>
+                    {/* Call the "submitHandler" function to create the order */}
                     <form onSubmit={submitHandler}>
                         <div className={classes.title}>Payment Method</div>
                         <div className={classes.subtitle}>All transactions are safe and secure</div>
@@ -111,6 +143,7 @@ const Payment = () => {
                     </form>
                 </div>
                 <div className={classes.summary}>
+                    {/* The prices will be recalculated and displayed in the "Summary" component */}
                     <Summary />
                 </div>
             </div>

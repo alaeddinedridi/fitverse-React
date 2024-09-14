@@ -15,8 +15,11 @@ const Summary = () => {
 
     useEffect(()=>{
         const loadPaypalScript = async () => {
+            // Get PAYPAL_CLIENT_ID from the backend 
             const { data: clientId } = await axios.get('http://localhost:3001/paypal/key');
             console.log('this is the clientId:'+clientId)
+
+            // Set PAYPAL_CLIENT_ID and the currency to be used
             paypalDispatch({
                 type: 'resetOptions',
                 value: {
@@ -30,9 +33,11 @@ const Summary = () => {
             
 
         }
+        // Call loadPaypalScript function to configure paypal
         loadPaypalScript()
     },[])
 
+    // Prepare the order by setting the total price of products to be paid in paypal
     function createOrder(data, actions) {
         return actions.order
           .create({
@@ -47,9 +52,12 @@ const Summary = () => {
           });
     }
 
+    // In case there's an error, show a notification
     const onError=()=> {
         toast.error("error");
     }
+
+    // When the order is paid, show a notification
     function onApprove(data, actions) {
         return actions.order.capture().then(async function (details) {
           try {
@@ -65,6 +73,7 @@ const Summary = () => {
       }
 
     const navigate=useNavigate()
+
     const round = (num)=>{
         return Math.round(num * 100 + Number.EPSILON) / 100; // 123.456 => 123.46
     }
@@ -73,6 +82,7 @@ const Summary = () => {
     const shippingPrice=price > 100 ? 0 : 15
     const tax = round(price * 0.15)
     const total = round(price + shippingPrice + tax)
+
     return (
         <div className={classes.wrapper}>
             <Toaster />
@@ -83,6 +93,7 @@ const Summary = () => {
             <div className={classes.total}><span>Total</span><span>{`$${nbrCartItems >0 ? total : 0}`}</span></div>
             <button className={location.pathname==="/cart" ? classes.checkout : classes.checkout+" "+classes.disabled} onClick={()=>navigate('/shipping')}>Checkout</button>
             
+            {/* Check if we are in order page then show paypal buttons */}
             {location.pathname==="/order"&& <PayPalButtons
              createOrder={createOrder}
              onApprove={onApprove}

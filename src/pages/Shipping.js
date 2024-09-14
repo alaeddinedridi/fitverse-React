@@ -23,12 +23,19 @@ const schema = yup.object({
 });
 
 const Shipping = () => {
+    // Use this to save data in redux
     const dispatch=useDispatch()
+
+    // Get shippingAddress from redux "checkoutSlice"
     const shippingAddress = useSelector(selectShippingAddress)
     const [checked, setChecked] = useState(true)
     const [index, setIndex] = useState(1)
     const navigate=useNavigate()
+
+    // Get user from redux "authSlice"
     let user= useSelector(selectUser)
+
+    // We are using this (package : react-hook-form) to validate user inputs in form
     const {handleSubmit,register,formState: { errors },setValue} = useForm({
         resolver: yupResolver(schema)
     });
@@ -40,10 +47,16 @@ const Shipping = () => {
 
     useEffect(() => {
         document.title = "Shipping Address - FitVerse"
+        
+        // When the page is loading, check if the user is logged in
+        // if the user is logged in then display the shipping page, otherwise redirect him to login page to signin
         if (!user){
             navigate('/login?redirect=/shipping')
         }
 
+        // Check if the user has already set a shipping address, then display those informations without making the user setting them again
+        // We take the saved shipping address from redux "checkoutSlice"
+        // Example: if the user set shipping address then go to the next page, then return to this page, he won't need to put the shipping address again
         if (shippingAddress!==null){
             setValue('fullname', shippingAddress.fullname);
             setValue('address', shippingAddress.address);
@@ -54,11 +67,14 @@ const Shipping = () => {
        
     }, [])
     const submitHandler=async(data)=>{
+        // Take user input (shipping address informations) from the form
         const fullname=data.fullname;
         const address=data.address;
         const city=data.city;
         const pcode=data.pcode;
         const country=data.country;
+
+        // Save shipping address in redux "checkoutSlice"
         dispatch(setShippingAddress({
             fullname,
             address,
@@ -66,6 +82,8 @@ const Shipping = () => {
             pcode,
             country
         }))
+
+        // Then take the user to the payment page where he will choose the payment method, for now it will be Paypal
         try{
             // const { data } = await axios.post('http://localhost:3001/shipping', {
             //     fullname,
@@ -83,11 +101,14 @@ const Shipping = () => {
 
     return (
         <Layout>
+            {/* In this page, the user puts the address where he wants to receive the products that he will buy */}
+            {/* This is the second step */}
             <Stepper activeStep={1} />
             
             <div className={classes.container}>
                 <Toaster />
                 <div className={classes.items}>
+                    {/* Call the "submitHandler" function to save shipping address set by the user */}
                     <form className={formClasses.form} onSubmit={handleSubmit(submitHandler)}>
                         <div className={formClasses.title}>Billing Address</div>
                         <div className={formClasses.form__element}>
