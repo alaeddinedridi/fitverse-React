@@ -67,35 +67,7 @@ const Payment = () => {
         }else{
             // If user choosed the payment method, then save it in redux "checkoutSlice"
             dispatch(savePaymentMethod(paymentMethod))
-
-            // Save the order in database, including saving picked products, shippingAddress, payment method, price of products without tax,shipping price, tax and total price to be paid
-            // Use axios to send a request
-            try{
-                const { data } = await axios.post('http://localhost:3001/order/create', {
-                    orderItems:products,
-                    shippingAddress,
-                    paymentMethod,
-                    price,
-                    shippingPrice,
-                    tax,
-                    total,
-                },
-                // Inside the save order request, send the user token, so in the backend, it can check if the user is logged in and his role is user
-                {
-                    headers: {
-                      authorization: `Bearer ${user.token}`,
-                    },
-                }
-                );
-                console.log(user.token)
-                // if the order was successfully saved then take the user to order page so he can pay the order
-                console.log("saved the order")
-                navigate('/order')
-            }catch(e){
-                // if the order has failed, then display a notification error
-                toast.error(e.message)
-            }
-            
+            navigate('/order')
         }  
       
     }
