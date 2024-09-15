@@ -15,6 +15,8 @@ import Order from '../Order'
 const Orders = (props) => {
     const [orders, setorders] = useState([])
     const user = useSelector(selectUser)
+
+    // Read all orders from the database
     const read = async ()=>{
         const {data}=await axios.get('http://localhost:3001/orders/read',{
             headers: {
@@ -34,7 +36,7 @@ const Orders = (props) => {
 
             <div className={classes.container}>
                   
-                
+                {/* Display orders here */}
                 {orders.map((order,index)=>
                     <Card title={"Order - Payment Method: "+order.paymentMethod}>
                         {order.orderItems.map((item,index)=>

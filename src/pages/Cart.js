@@ -8,6 +8,7 @@ import {addItem,selectNbrItems,selectCart,selectTotal} from '../redux/features/c
 import { Link } from 'react-router-dom'
 const Cart = () => {
     const dispatch = useDispatch();
+    // Get products added to cart from redux "cartSlice"
     const products = useSelector(selectCart);
     const nbrCartItems = useSelector(selectNbrItems);
 
@@ -20,6 +21,7 @@ const Cart = () => {
         <Layout>
             <div className={classes.container}>
                 <div className={classes.items}>
+                    {/* Display all products added to cart */}
                     {nbrCartItems > 0 ? products.map((cartItem,index)=><CartItem key={index} item={cartItem} />):
                     <div>Cart is empty. <Link to="/watches" style={{textDecoration:"none",color:"black"}}><span className={classes.link}>Go shopping</span></Link></div>}
                 </div>

@@ -19,15 +19,7 @@ const Dashboard = (props) => {
     const [yearlySales, setYearlySales]=useState(0)
 
     const user = useSelector(selectUser)
-    const read = async ()=>{
-        
-        // const {orders}=await axios.get('http://localhost:3001/orders/read')
-        // setOrders(orders)
-        // const {users}=await axios.get('http://localhost:3001/users/read')
-        // setUsers(users)
-      
-
-    }
+   
 
     
 
@@ -37,6 +29,8 @@ const Dashboard = (props) => {
         
         try{
             // Make multiple API calls at the same time
+            // Get all products, orders and users from database
+            // Send token in request, so in the backend it confirms the request comes from admin
             const [productsData, ordersData, usersData] = await Promise.all([
                 await axios.get('http://localhost:3001/products/read'),
                 await axios.get('http://localhost:3001/orders/read',{
@@ -61,14 +55,16 @@ const Dashboard = (props) => {
            
             setUsers(usersData.data)
             
-
+            // Count the number of products, orders and users
             setNbrOfProducts(products.length)
-
             setNbrOfOrders(orders.length)
             setNbrOfUsers(users.length)
 
-            // calculate daily sales
+            // Calculate daily sales
+
+            // for all the orders extract date and price and set them in a new array
             let dateAndPriceOrders= orders.map(order=> {
+                
                 const date = order.createdAt.substring(0,order.createdAt.indexOf('T'))
                 const price = order.total
                 return {date,price}
@@ -76,6 +72,9 @@ const Dashboard = (props) => {
             console.log("those are dateAndPriceOrders: "+dateAndPriceOrders)
             
             let dailyAvgPrices=[]
+
+            // Compare each element's date to all other elements date, if they are equal put them together
+            // then calculate the average price of all orders that have similar date
             dateAndPriceOrders.map((elementI,i)=>{
                 console.log("this is i: "+i)
                 let similarDates=[]
@@ -108,17 +107,21 @@ const Dashboard = (props) => {
             dailyAvgPrices.map(dailyAvgPrice=>{
                 totalDailyAvgPrice+=dailyAvgPrice
             })
-            //setDailySales(dailyOrderPrice)
+           
             setAverageDailySales((totalDailyAvgPrice/dailyAvgPrices.length).toFixed(2))
 
             // calculate monthly sales
 
+            // Get the current date and year
             let today = new Date();
             let year = today.getFullYear();
             console.log("this is year:"+year)
+
             let monthlyAvgPrices=0
             let monthlyPrices=0
 
+            // For each order, check if the order's date has been done in the current year then add it's price to the price of other order done in the same year 
+            
             dateAndPriceOrders.map(dateAndPriceOrder=>{
                 console.log("this is sub year:"+dateAndPriceOrder.date.substring(0,4))
                 if (dateAndPriceOrder.date.substring(0,4) == year){
@@ -126,14 +129,15 @@ const Dashboard = (props) => {
                     console.log("monthly prices: "+monthlyPrices)
                 }
             })
-
+            
+            // Divide the addition of prices of the current year by 12 months 
             monthlyAvgPrices=monthlyPrices/12
             console.log("monthly average: "+monthlyAvgPrices)
-            setMonthlySales(monthlyAvgPrices.toFixed(2))
+            setMonthlySales(monthlyAvgPrices.toLocaleString(undefined, {maximumFractionDigits:2}))
 
 
             // yearly sales
-            setYearlySales(monthlyPrices.toFixed(2))
+            setYearlySales(monthlyPrices.toLocaleString(undefined, {maximumFractionDigits:2}))
 
             //console.log("try daily another way: "+monthlyAvgPrices/30)
 
@@ -154,9 +158,9 @@ const Dashboard = (props) => {
                 <div className={classes.card}>Number of products <div>{products && nbrOfProducts}</div></div>
                 <div className={classes.card}>Number of Orders <div>{orders && nbrOfOrders}</div></div>
                 <div className={classes.card}>Number of Users <div>{users && nbrOfUsers}</div></div>
-                <div className={classes.card}>Daily Sales <div>${averageDailySales}</div></div>
-                <div className={classes.card}>Monthly Sales <div>${monthlySales}</div></div>
-                <div className={classes.card}>Yearly Sales <div>${yearlySales}</div></div>
+                <div className={classes.card}>Daily Sales <div>${averageDailySales || 0}</div></div>
+                <div className={classes.card}>Monthly Sales <div>${monthlySales || 0}</div></div>
+                <div className={classes.card}>Yearly Sales <div>${yearlySales || 0}</div></div>
             </div>
             
         </AdminLayout>

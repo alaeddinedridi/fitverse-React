@@ -41,6 +41,8 @@ function App() {
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/order" element={<Order />} />
+        
+        {/* Protected routes are meant to be visited only by admin */}
         <Route path="/admin/product-upload" element={<ProtectedRoute><ProductUpload/></ProtectedRoute>} />
         <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/admin/products" element={<ProtectedRoute><AllProducts /></ProtectedRoute>} />

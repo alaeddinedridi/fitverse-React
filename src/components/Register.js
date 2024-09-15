@@ -19,27 +19,33 @@ const Register = () => {
     });
 
     const submitHandler=async(data)=>{
+        // Get user account informations from the register form
         const fullname=data.fullname;
         const email=data.email;
         const password=data.password;
         const confirmPassword=data.confirmPassword;
         console.log(fullname+""+email+""+password)
+        // check if the passwords are equal
         if (password !== confirmPassword){
             toast.error("passwords doesn't match")
             return;
         }
         try{
+            // Create the account by saving it in the database
             const { data } = await axios.post('http://localhost:3001/auth/register', {
                 fullname,
                 email,
                 password,
             });
             console.log(data)
+
+            // Show a success message in notification
             toast.success('Account created!', {
                 duration: 10000,
             });
         
         }catch(e){
+            // if there's any issue creating the account, then display a notification containing the error message
             toast.error(e.message, {
                 duration: 10000,
             });
@@ -47,6 +53,7 @@ const Register = () => {
     }
     return (
         <div>
+            {/* Toaster is used to display notifications */}
             <Toaster />
             <div className={classes.title}>Register</div>
             <div className={classes.subtitle}>If you don't have an account, create one here.</div>

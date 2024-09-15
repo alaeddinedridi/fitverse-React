@@ -36,23 +36,14 @@ const ProductUpload = () =>{
   
 
     const fetch=async()=>{
+      // if id is not undefined, then we are on update product page
       if (id != undefined){
         console.log("this is the id not undefined: "+id)
+        // Get the product that we want to update from database
         const { data } = await axios.get('http://localhost:3001/product/'+id)
         console.log("fetched product"+data)
         setProduct(data)
         setProductExist(true)
-        
-        // for(var prop in product) {
-        //   console.log("this is prop: "+prop)
-        //   console.log("this is the product: "+product)
-        //   if(product.hasOwnProperty(prop)){
-        //     setProductExist(true)
-        //   }else{
-        //     setProductExist(false)
-        //   }
-        // }
-        
       }else{
         setProductExist(false)
       }
@@ -70,6 +61,18 @@ const ProductUpload = () =>{
     //   }
     // })
 
+    
+    useEffect( () => {
+      document.title = "Admin Product Upload - FitVerse"
+
+      console.log("this is the id: "+id)
+      // Call the fetch function to check if we are on the update product page or on the upload product page
+      fetch()
+      
+      console.log("exist ?"+productExist)
+    }, [])
+
+
     let defaultProduct={
       name: product.name,
       category: product.category,
@@ -79,16 +82,9 @@ const ProductUpload = () =>{
       description: product.description
     }
 
-    useEffect( () => {
-      document.title = "Admin Product Upload - FitVerse"
-
-      console.log("this is the id: "+id)
-      fetch()
-      
-      console.log("exist ?"+productExist)
-    }, [])
 
     useEffect( ()=> {
+      // if we are on update product page, then fill the form fields with the acutal product informations
       if (productExist){
         reset({...defaultProduct});
       }
@@ -96,15 +92,12 @@ const ProductUpload = () =>{
 
     const submitHandler=async(formdata)=>{
 
-      const name=formdata.name
-      const category=formdata.category
-      const brand=formdata.brand
-      const price=formdata.price
-      const stock=formdata.stock
-      const description=formdata.description
+      
       //const role=user.user.role
       let dataToBeSent={}
 
+      // If there are pictures selected then we have to set then in a FormData so we can send them to the backend
+      // but we will also need to put product's informations also in FormData so we can send them together
       if (files.length>0) {
         dataToBeSent = new FormData()
         dataToBeSent.append("name",formdata.name);
@@ -119,8 +112,19 @@ const ProductUpload = () =>{
           dataToBeSent.append("files", file, file.name)
         })
      
+      
         
+
       }else{
+        // Otherwise if we don't have pictures selected, then just Get the new product's informations from the form fields
+
+        const name=formdata.name
+        const category=formdata.category
+        const brand=formdata.brand
+        const price=formdata.price
+        const stock=formdata.stock
+        const description=formdata.description
+
         dataToBeSent={
           name,
           category,
@@ -132,10 +136,12 @@ const ProductUpload = () =>{
       }
     
       if (productExist){
-
+        // if we are on update product page 
         try{
           console.log("we are going to update the product")
-          //console.log("this is the data to be sent: "+data)
+       
+          // update the product with new informations
+          // We send the token in the request, so in the backend we confirm that the request comes from admin
           const { res } = await axios.put('http://localhost:3001/product/update/'+id,dataToBeSent,
           {
             headers: {
@@ -143,19 +149,23 @@ const ProductUpload = () =>{
             }
           });
           console.log(res)
+          // Display a notification with message "Product updated!"
           toast.success('Product updated!', {
             duration: 10000,
           });
          
         }catch(e){
+            // if there's an error then display "Failed to update the product!"
             console.log(e.message)
             toast.error('Failed to update the product!', {
               duration: 10000,
             });
         }
       }else{
-
+        // if we are on upload new product page 
         try{
+          // Upload the new product
+          // We send the token in the request, so in the backend we confirm that the request comes from admin
           const { res } = await axios.post('http://localhost:3001/product/upload', dataToBeSent,
           {
             headers: {
@@ -163,12 +173,14 @@ const ProductUpload = () =>{
             }
           });
           console.log(res)
+          // Display a notification with message "Product uploaded!"
           toast.success('Product uploaded!', {
             duration: 10000,
           });
          
         }catch(e){
             console.log(e.message)
+            // if there's an error then display "Failed to upload the product!"
             toast.error('Failed to upload the product!', {
               duration: 10000,
             });
@@ -185,7 +197,9 @@ const ProductUpload = () =>{
   return (
     <AdminLayout>
       <div className={classes.container}>
+        {/* Toaster is used to show notifications */}
       <Toaster />
+      {/* When we click on Update or upload button then call the function "submitHandler" to update or upload new product */}
       <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
         <div className={classes.left_wrapper}>
 

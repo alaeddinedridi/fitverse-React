@@ -11,18 +11,9 @@ import Layout from '../../components/Layout'
 const Orders = (props) => {
     const [orders, setorders] = useState([])
     const user = useSelector(selectUser)
-    const read = async ()=>{
-        const {data}=await axios.get('http://localhost:3001/orders/read',{
-            headers: {
-              authorization: `Bearer ${user.token}`,
-            },
-        })
-        setorders(data)
-    }
+    
     useEffect(() => {
         document.title = "Admin Login - FitVerse"
-
-        read()
     }, [])
 
     return (

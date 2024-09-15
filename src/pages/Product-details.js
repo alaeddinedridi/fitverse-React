@@ -11,6 +11,8 @@ const ProductDetails = () => {
     let { id } = useParams();
     const dispatch=useDispatch()
     const [featured, setFeatured] = useState(0)
+
+    // When we click on a product, a request is sent to the backend to get that product from database and display all product's informations
     const fetch=async()=>{
         const { data } = await axios.get('http://localhost:3001/product/'+id)
         console.log(data)
@@ -19,6 +21,7 @@ const ProductDetails = () => {
     useEffect(() => {
         document.title = "Product Details - FitVerse"
         console.log(id)
+        // call the fetch function while page is loading
         fetch()
 
     }, [])

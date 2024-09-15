@@ -11,7 +11,11 @@ import Layout from '../../components/Layout'
 import User from '../../components/User'
 const Users = (props) => {
     const [users, setUsers] = useState([])
+    // Get user informations from redux "authSlice"
     const user = useSelector(selectUser)
+
+    // Read all users from the database
+    // Send token in request, so in the backend it confirms the request comes from admin
     const read = async ()=>{
         const {data}=await axios.get('http://localhost:3001/users/read',{
             headers: {
@@ -23,6 +27,7 @@ const Users = (props) => {
     useEffect(() => {
         document.title = "Users - FitVerse"
 
+        // Call the read function while page loading
         read()
     }, [])
 
@@ -35,7 +40,8 @@ const Users = (props) => {
                         <th>Email</th>
                         <th>Role</th>
                     </tr>
-                
+
+                    {/* Display users here */}
                     {users.map(user=> <User user={user} />)}
                         
 

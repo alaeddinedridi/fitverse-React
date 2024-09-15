@@ -21,6 +21,7 @@ const Products = (props) => {
 
     let whatWeAreSearchingFor= useSelector(selectSearch)
 
+    // Read products of a specific category 
     const read = async ()=>{
         const {data}=await axios.get('http://localhost:3001/products/readbycategory/'+props.category)
         setproducts(data)
@@ -28,6 +29,7 @@ const Products = (props) => {
 
     const [idOfRemovedProduct, setIdOfRemovedProduct] = useState("");
 
+    // when the admin deletes a product, this remove the product from the list of products
     const handleDataFromChild = (id) => {
         setIdOfRemovedProduct(id);
         console.log("this is the id of the removed product: "+id)
@@ -36,6 +38,7 @@ const Products = (props) => {
 
     useEffect(() => {
         read()
+        // if the user is searching for products then display the products he is searching for
         if (whatWeAreSearchingFor.length>0 && products.length>0){
             setFilteredProducts(products.filter(product => product.name.toLowerCase().includes(whatWeAreSearchingFor)))
             console.log("filtered products: "+filteredProducts)
@@ -110,6 +113,7 @@ const Products = (props) => {
                 
             </div>
             <div className={classes.container__grid}>
+                {/* Display products here */}
                 {whatWeAreSearchingFor.length>0 ? filteredProducts.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) : products.map((product,index)=><Product key={index} product={product} sendDataToParent={handleDataFromChild} />) } 
             </div>
             {/* <div className={open ? classes.bg : ''}><Sidebar /></div> */}

@@ -34,19 +34,23 @@ const Login = () => {
         const email=data.email;
         const password=data.password;
         try{
+            // Send email and password to backend so user can login
             const { data } = await axios.post('http://localhost:3001/auth/login', {
                 email,
                 password,
             });
             console.log(data)
             dispatch(login(data))
+            // if the user is user redirect him to shipping page
             if (data.user.role == "user"){
                 navigate(redirect || '/shipping')
             }else if (data.user.role === "admin"){
+                // if user is admin redirect him to admin dashboard page after login
                 navigate(redirect || '/admin/dashboard')
             }
             
         }catch(e){
+            // if login was not successful then display an error notification
             toast.error(e.message, {
                 duration: 10000,
             });

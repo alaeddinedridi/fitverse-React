@@ -15,10 +15,11 @@ const Product = (props) => {
     const [isAdmin,setIsAdmin]=useState(false)
     const user = useSelector(selectUser)
 
-
+    // This function is used to delete a product
     const remove =async (id)=>{
     
         try{
+            // Send delete request to the backend with the id of the product to delete
             const { res } = await axios.delete('http://localhost:3001/product/delete/'+id,
             {
                 headers: {
@@ -27,6 +28,7 @@ const Product = (props) => {
             }
             )
             console.log(res)
+            // Send the id of the product we removed to the products component
             props.sendDataToParent(id)
            
         }catch(e){
@@ -35,7 +37,7 @@ const Product = (props) => {
     }
 
     useEffect(()=>{
-        
+        // check if the logged in user is user or admin
         if (user!=null){
             console.log("this is the role :"+user.user.role)
             if (user.user.role === "admin"){
@@ -57,7 +59,9 @@ const Product = (props) => {
             <div className={classes.description}>{description}</div>
             <div className={classes.price}>$ {price}</div>
             </Link>
+            {/* if the user is user then show the button to add the product to cart */}
             { !isAdmin && <button onClick={()=> dispatch(addItem(props.product))} className={show ? `${classes.btn} ${classes.btn_show}`:classes.btn}>ADD TO CART</button>}
+            {/* If the user is admin then show buttons on product for Update and Delete */}
             { isAdmin && <button onClick={()=> remove(_id)} className={classes.deleteBtn}>Delete</button>}
             { isAdmin && <Link to={"/admin/product/update/"+_id}><button className={classes.updateBtn}>Update</button></Link>}
         </article>
