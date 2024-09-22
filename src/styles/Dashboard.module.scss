@@ -1,7 +1,7 @@
 .card{
     background-color: white;
     color:black;
-    padding:5rem;
+    padding:5rem 1rem;
 
     div{
         font-size: 2rem;
@@ -23,15 +23,13 @@
 @media screen and (min-width:1367px) and (max-width:1920px) {
     .container{
         grid-template-columns: repeat(3,0.7fr);
+        
     }
 
     .card{
         font-size: 1.7rem;
         padding:8rem;
-    
-        div{
-            font-size: 3rem;
-        }
+
     }
    
 }
@@ -49,4 +47,21 @@
       grid-template-columns: repeat(1,1fr);
       row-gap: 3px;
   }
+}
+
+
+@media screen and (max-width:430px){
+    .container{
+        grid-template-columns: repeat(1,1fr);
+        row-gap: 2px;
+    }
+
+    .card{
+        font-size: 1.3rem;
+        padding:3em 1em;
+    
+        div{
+            font-size: 2.5rem;
+        }
+    }
 }

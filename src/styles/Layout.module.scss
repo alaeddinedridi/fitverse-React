@@ -1,3 +1,7 @@
+header{
+    user-select: none;
+}
+
 .header,.navbar{
     display: flex;
     justify-content: space-between;
@@ -193,7 +197,7 @@ footer{
 
 
 main{
-    min-height: 100vh;
+    min-height: 80vh;
 }
 
 @media screen and (min-width:1367px) and (max-width:1920px){
@@ -302,7 +306,7 @@ main{
     }
 }
 
-@media screen and (max-width:420px){
+@media screen and (max-width:430px){
  
     .col_left{
         font-size: .8rem;

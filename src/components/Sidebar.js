@@ -1,8 +1,9 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import classes from '../styles/Sidebar.module.scss'
 import { useDispatch,useSelector } from 'react-redux'
 import { selectToggle} from '../redux/features/sidebarSlice'
 import {toggle} from '../redux/features/sidebarSlice'
+import {FiSearch,FiHeart} from 'react-icons/fi'
 import { Link,useNavigate } from 'react-router-dom'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import { items } from '../utils/navbarItems'
@@ -11,6 +12,8 @@ import { selectUser,logout } from '../redux/features/authSlice'
 import {BsHandbag} from 'react-icons/bs'
 import {BiUser} from 'react-icons/bi'
 import {MdLanguage, MdOutlineLogout} from 'react-icons/md'
+import {searchForProduct,selectSearch} from '../redux/features/navbarSlice'
+
 
 const Sidebar = (props) => {
     const dispatch=useDispatch()
@@ -18,12 +21,33 @@ const Sidebar = (props) => {
     const navigate=useNavigate()
     let nbrOfItems = useSelector(selectNbrItems)
     const user = useSelector(selectUser)
-
+    let whatWeAreSearchingFor= useSelector(selectSearch)
+    const [searchString, setSearchString] = useState("")
+    
+    const goToCart= ()=>{
+        navigate('/cart')
+        dispatch(toggle(false))
+    }
 
     const logoutHandler=()=>{
         dispatch(logout())
         dispatch(clear())
         navigate('/')
+        dispatch(toggle(false))
+    }
+
+    const search=()=>{
+        dispatch(searchForProduct(searchString))
+        dispatch(toggle(false))
+    }
+
+    const redirectUser=()=>{
+        if (user != null ){
+            navigate("/admin/dashboard")
+        }else{
+            navigate("/admin/login")
+        }
+        dispatch(toggle(false))
     }
 
     useEffect(() => {
@@ -49,12 +73,16 @@ const Sidebar = (props) => {
                 {items.map((item,index)=><div key={index} className={classes.navbar__item+" "+classes.navbar__items__item+" "+classes.nav_item}><Link onClick={()=>dispatch(toggle(false))} style={{ textDecoration: 'none',color:'black' }} to={"/"+item}>{item}</Link></div>)}
             </div>
 
+            <div className={classes.navbar__right__search_wrapper}>
+                <div onClick={()=>search()}><FiSearch className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
+                <input type="search" placeholder="Search" value={searchString} onChange={(e)=> setSearchString(e.target.value)} className={classes.search} /></div>
+            
             <div>
-                <div className={classes.navbar__item}><Link style={{ textDecoration: 'none',color:'black' }} to={user != null ? "/admin/dashboard" : "/admin/login"}><BiUser className={classes.navbar__right__icon+" "+classes.nav_item} /></Link></div> 
+                <div className={classes.navbar__item}><BiUser onClick={redirectUser} className={classes.navbar__right__icon+" "+classes.nav_item} /></div> 
                         {/* <div className={classes.navbar__item}><FiHeart className={classes.navbar__right__icon+" "+classes.nav_item} /></div> */}
                 <div className={classes.navbar__item}><MdOutlineLogout onClick={logoutHandler} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
 
-                <div className={classes.navbar__item+" "+classes.navbar_item__cart}>{nbrOfItems>0 && <div className={classes.nbr_items}>{nbrOfItems}</div>}<BsHandbag onClick={()=>navigate('/cart')} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
+                <div className={classes.navbar__item+" "+classes.navbar_item__cart}>{nbrOfItems>0 && <div className={classes.nbr_items}>{nbrOfItems}</div>}<BsHandbag onClick={goToCart} className={classes.navbar__right__icon+" "+classes.nav_item} /></div>
             </div>
             
         </aside>

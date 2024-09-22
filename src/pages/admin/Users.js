@@ -42,7 +42,7 @@ const Users = (props) => {
                     </tr>
 
                     {/* Display users here */}
-                    {users.map(user=> <User user={user} />)}
+                    {users.map(user=> <User user={user} key={user._id} />)}
                         
 
                 </table>
