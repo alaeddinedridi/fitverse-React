@@ -6,7 +6,7 @@ import {removeItem,selectCart} from '../redux/features/cartSlice'
 import { useDispatch,useSelector } from 'react-redux'
 const CartItem = (props) => {
     const dispatch = useDispatch()
-    const {images,name,price}=props.item
+    const {images,name,price,description}=props.item
     return (
         <div className={classes.cart_item}>
             <div className={classes.cart_item__img}>
