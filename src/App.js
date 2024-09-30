@@ -44,13 +44,13 @@ function App() {
         <Route path="/order" element={<Order />} />
         
         {/* Protected routes are meant to be visited only by admin */}
-        <Route path="/admin/product-upload" element={<TokenExpiration><ProtectedRoute><ProductUpload/></ProtectedRoute></TokenExpiration>} />
-        <Route path="/admin/dashboard" element={<TokenExpiration><ProtectedRoute><Dashboard /></ProtectedRoute></TokenExpiration>} />
-        <Route path="/admin/products" element={<TokenExpiration><ProtectedRoute><AllProducts /></ProtectedRoute></TokenExpiration>} />
-        <Route path="/admin/product/update/:id" element={<TokenExpiration><ProtectedRoute><ProductUpload /></ProtectedRoute></TokenExpiration>} />
-        <Route path="/admin/orders" element={<TokenExpiration><ProtectedRoute><Orders /></ProtectedRoute></TokenExpiration>} />
+        <Route path="/admin/product-upload" element={<ProtectedRoute><ProductUpload/></ProtectedRoute>} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/admin/products" element={<ProtectedRoute><AllProducts /></ProtectedRoute>} />
+        <Route path="/admin/product/update/:id" element={<ProtectedRoute><ProductUpload /></ProtectedRoute>} />
+        <Route path="/admin/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path="/admin/login" element={<Login />} />
-        <Route path="/admin/users" element={<TokenExpiration><ProtectedRoute><Users /></ProtectedRoute></TokenExpiration>} />
+        <Route path="/admin/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
       </Routes>
     </div>
   );

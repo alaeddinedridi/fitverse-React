@@ -23,7 +23,8 @@ const AdminLayout = (props) => {
             <div className={classes.container}>
                 <div className={classes.sidebar_toggler} onClick={toggleSidebar}>{showSidebar ? "Hide":"Show"} Sidebar <div>
                     {showSidebar? <MdKeyboardDoubleArrowUp /> : <MdKeyboardDoubleArrowDown />}
-                    </div></div>
+                    </div>
+                </div>
                 <div className={showSidebar ? `${classes.container__left} ${classes.show_sidebar}` :`${classes.container__left} ${classes.hide_sidebar}`}>
                     <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/dashboard"}><div className={classes.element}>Dashboard</div></Link>
                     <Link style={{ textDecoration: 'none',color:'white' }} to={"/admin/products"}><div className={classes.element}>Products</div></Link>
