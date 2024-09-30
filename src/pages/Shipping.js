@@ -95,7 +95,9 @@ const Shipping = () => {
             // console.log(data)
             navigate('/payment')
         }catch(e){
-            toast.error(e.message)
+            toast.error(e.message, {
+                duration: 10000,
+            })
         }
     }
 

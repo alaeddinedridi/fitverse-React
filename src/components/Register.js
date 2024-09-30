@@ -27,7 +27,9 @@ const Register = () => {
         console.log(fullname+""+email+""+password)
         // check if the passwords are equal
         if (password !== confirmPassword){
-            toast.error("passwords doesn't match")
+            toast.error("passwords doesn't match", {
+                duration: 10000,
+            })
             return;
         }
         try{

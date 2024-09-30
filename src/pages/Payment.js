@@ -63,7 +63,9 @@ const Payment = () => {
         e.preventDefault()
         // Check if user choosed a payment method, otherwise display an error message
         if (!paymentMethod){
-            toast.error("Payment method is required!")
+            toast.error("Payment method is required!", {
+                duration: 10000,
+            })
         }else{
             // If user choosed the payment method, then save it in redux "checkoutSlice"
             dispatch(savePaymentMethod(paymentMethod))

@@ -60,7 +60,9 @@ const Summary = () => {
 
     // In case there's an error, show a notification
     const onError=()=> {
-        toast.error("error");
+        toast.error("error", {
+          duration: 10000,
+        });
     }
 
     const round = (num)=>{
@@ -106,11 +108,15 @@ const Summary = () => {
               
           
 
-            toast.success('Order is paid');
+            toast.success('Order is paid', {
+              duration: 10000,
+            });
             console.log('order is paid')
           } catch (err) {
             // dispatch({ type: 'PAY_FAIL', payload: getError(err) });
-            toast.error("not working");
+            toast.error("not working", {
+              duration: 10000,
+            });
           }
         });
       }
